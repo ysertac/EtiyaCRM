@@ -21,14 +21,4 @@ public class BaseEntity {
     private LocalDateTime updatedDate;
     @Column(name = "deleted_date")
     private LocalDateTime deletedDate;
-
-    @PrePersist
-    public void onCreate() {
-        createdDate = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    public void onUpdate() {
-        updatedDate = LocalDateTime.now();
-    }
 }
