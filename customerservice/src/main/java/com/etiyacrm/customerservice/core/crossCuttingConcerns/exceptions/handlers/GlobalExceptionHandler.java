@@ -47,6 +47,6 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ProblemDetails handleException() {
         return new ProblemDetails("Unknown Error",
-                "Some error occurred.", "https://turkcell.com/exceptions/unknown","500");
+                "Some error occurred.", "https://etiya.com/exceptions/unknown","500");
     }
 }

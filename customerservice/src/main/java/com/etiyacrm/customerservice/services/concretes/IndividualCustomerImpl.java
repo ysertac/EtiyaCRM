@@ -9,6 +9,7 @@ import com.etiyacrm.customerservice.services.dtos.requests.individualCustomerReq
 import com.etiyacrm.customerservice.services.dtos.requests.individualCustomerRequests.UpdateIndividualCustomerRequest;
 import com.etiyacrm.customerservice.services.dtos.responses.IndividualCustomerResponses.*;
 import com.etiyacrm.customerservice.services.mappers.IndividualCustomerMapper;
+import com.etiyacrm.customerservice.services.rules.IndividualCustomerBusinessRules;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +21,12 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class IndividualCustomerImpl implements IndividualCustomerService {
     private IndividualCustomerRepository individualCustomerRepository;
+    private IndividualCustomerBusinessRules individualCustomerBusinessRules;
 
     @Override
     public CreatedIndividualCustomerResponse add(CreateIndividualCustomerRequest createIndividualCustomerRequest) {
+        individualCustomerBusinessRules.individualCustomerNationalityNoCannotBeDuplicated(createIndividualCustomerRequest.getNationalityId());
+
         Customer customer = new Customer();
         customer.setEmail(createIndividualCustomerRequest.getEmail());
         customer.setCreatedDate(LocalDateTime.now());
@@ -51,6 +55,9 @@ public class IndividualCustomerImpl implements IndividualCustomerService {
 
     @Override
     public GetIndividualCustomerResponse findById(long id) {
+        individualCustomerBusinessRules.individualCustomerIdMustExist(id);
+        individualCustomerBusinessRules.deletedIndividualCustomer(id);
+
         IndividualCustomer foundIndividualCustomer = individualCustomerRepository.findById(id).get();
 
         GetIndividualCustomerResponse getIndividualCustomerResponse =
@@ -60,6 +67,9 @@ public class IndividualCustomerImpl implements IndividualCustomerService {
 
     @Override
     public UpdatedIndividualCustomerResponse update(UpdateIndividualCustomerRequest updateIndividualCustomerRequest, long id) {
+        individualCustomerBusinessRules.deletedIndividualCustomer(id);
+        individualCustomerBusinessRules.individualCustomerIdMustExist(id);
+        individualCustomerBusinessRules.individualCustomerNationalityNoCannotBeDuplicated(updateIndividualCustomerRequest.getNationalityId());
         IndividualCustomer foundIndividualCustomer = individualCustomerRepository.findById(id).get();
         IndividualCustomer individualCustomer =
                 IndividualCustomerMapper.INSTANCE.individualCustomerFromUpdateIndividualCustomerRequest(updateIndividualCustomerRequest);
@@ -78,6 +88,9 @@ public class IndividualCustomerImpl implements IndividualCustomerService {
 
     @Override
     public DeletedIndividualCustomerResponse delete(long id) {
+        individualCustomerBusinessRules.individualCustomerIdMustExist(id);
+        individualCustomerBusinessRules.deletedIndividualCustomer(id);
+
         IndividualCustomer foundIndividualCustomer = individualCustomerRepository.findById(id).get();
         foundIndividualCustomer.getCustomer().setId(id);
         foundIndividualCustomer.getCustomer().setDeletedDate(LocalDateTime.now());
