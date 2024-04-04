@@ -16,24 +16,24 @@ public class IndividualCustomerBusinessRules {
     private MessageService messageService;
     private IndividualCustomerRepository individualCustomerRepository;
 
-    public void individualCustomerNationalityNoCannotBeDuplicated(String nationalityId) {
+    public void individualCustomerNationalityIdCannotBeDuplicated(String nationalityId) {
         Optional<IndividualCustomer> individualCustomer = individualCustomerRepository.findByNationalityId(nationalityId);
-        if(individualCustomer.isPresent() && individualCustomer.get().getCustomer().getDeletedDate() != null){
-            throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.NATIONAL_ID_EXISTS));
+        if(individualCustomer.isPresent() && individualCustomer.get().getCustomer().getDeletedDate() == null){
+            throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.NATIONALITY_ID_EXISTS));
         }
     }
 
     public void individualCustomerIdMustExist(long id) {
         Optional<IndividualCustomer> individualCustomer = individualCustomerRepository.findById(id);
-        if(individualCustomer.isEmpty()){
+        if(!individualCustomer.isPresent() || individualCustomer.get().getCustomer().getDeletedDate() != null) {
             throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.INDIVIDUAL_CUSTOMER_NOT_FOUND));
         }
     }
 
-    public void deletedIndividualCustomer(long id) {
+    /*public void deletedIndividualCustomer(long id) {
         IndividualCustomer individualCustomer = individualCustomerRepository.findById(id).orElse(null);
         if (individualCustomer.getCustomer().getDeletedDate() != null) {
             throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.INDIVIDUAL_CUSTOMER_IS_DELETED));
         }
-    }
+    }*/
 }
