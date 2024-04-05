@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/individualcustomers")
+@RequestMapping("customerservice/api/v1/individualcustomers")
 @AllArgsConstructor
 public class IndividualCustomerController {
     private IndividualCustomerService individualCustomerService;
