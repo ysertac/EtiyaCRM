@@ -65,7 +65,6 @@ public class IndividualCustomerImpl implements IndividualCustomerService {
     public UpdatedIndividualCustomerResponse update(UpdateIndividualCustomerRequest updateIndividualCustomerRequest, long id) {
         //individualCustomerBusinessRules.deletedIndividualCustomer(id);
         individualCustomerBusinessRules.individualCustomerIdMustExist(id);
-        individualCustomerBusinessRules.individualCustomerNationalityIdCannotBeDuplicated(updateIndividualCustomerRequest.getNationalityId());
 
         IndividualCustomer foundIndividualCustomer = individualCustomerRepository.findById(id).get();
         IndividualCustomer individualCustomer =
