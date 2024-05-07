@@ -19,6 +19,18 @@ public class Address {
     @Column(name = "description")
     private String descripion;
 
+    @Column(name = "neighbourhood")
+    private String neighbourhood;
+
+    @Column(name = "houseNumber")
+    private String houseNumber;
+
+    @Column(name = "district")
+    private String district;
+
+    @Column(name = "street")
+    private String street;
+
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
