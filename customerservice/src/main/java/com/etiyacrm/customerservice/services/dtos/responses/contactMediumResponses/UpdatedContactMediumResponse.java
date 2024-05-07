@@ -1,4 +1,4 @@
 package com.etiyacrm.customerservice.services.dtos.responses.contactMediumResponses;
 
-public class DeleteContactMediumResponse {
+public class UpdatedContactMediumResponse {
 }

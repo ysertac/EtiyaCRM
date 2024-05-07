@@ -1,4 +1,4 @@
 package com.etiyacrm.customerservice.services.dtos.responses.contactMediumResponses;
 
-public class CreateContactMediumResponse {
+public class CreatedContactMediumResponse {
 }
