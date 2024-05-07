@@ -51,9 +51,11 @@ public class ContactMediumServiceImpl implements ContactMediumService {
 
     @Override
     public UpdatedContactMediumResponse update(UpdateContactMediumRequest updateContactMediumRequest, long id) {
+        ContactMedium contactMediumFromDb = this.contactMediumRepository.findById(id).get();
         ContactMedium contactMedium  = ContactMediumMapper.INSTANCE.contactMediumFromUpdateContactMediumRequest(updateContactMediumRequest);
         contactMedium.setId(id);
         contactMedium.setUpdatedDate(LocalDateTime.now());
+        contactMedium.setCreatedDate(contactMediumFromDb.getCreatedDate());
         ContactMedium updatedContactMedium = this.contactMediumRepository.save(contactMedium);
 
         return ContactMediumMapper.INSTANCE.updatedContactMediumResponseFromContactMedium(updatedContactMedium);
