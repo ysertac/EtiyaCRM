@@ -1,0 +1,22 @@
+eureka:
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8888/eureka
+  instance:
+    instance-id: ${spring.application.name}:${instanceId:${random.value}}
+    preferIpAddress: true
+server:
+  port: 0
+spring:
+  application:
+    name: filter-service
+  data:
+    mongodb:
+      database: crmsearchdb
+      uri: mongodb://localhost:27017
+  kafka:
+    consumer:
+      auto-offset-reset: earliest
+      bootstrap-servers: localhost:9092
