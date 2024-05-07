@@ -28,4 +28,8 @@ public class ContactMedium extends BaseEntity {
 
     @Column(name = "fax")
     private String fax;
+
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 }
