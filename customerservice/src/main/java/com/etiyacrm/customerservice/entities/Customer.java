@@ -19,12 +19,12 @@ public class Customer extends BaseEntity {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "email")
-    private String email;
-
     @OneToOne(mappedBy = "customer")
     private IndividualCustomer individualCustomer;
 
     @OneToMany(mappedBy = "customer")
     private List<Address> addresses;
+
+    @OneToOne(mappedBy = "customer")
+    private ContactMedium contactMedium;
 }

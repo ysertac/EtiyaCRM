@@ -16,14 +16,27 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(name = "street")
+    private String street;
+
+    @Column(name = "district")
+    private String district;
+
+    @Column(name = "neighbourhood")
+    private String neighbourhood;
+
+    @Column(name = "houseNumber")
+    private String houseNumber;
+
     @Column(name = "description")
-    private String descripion;
+    private String description;
+
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    private City city;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @ManyToOne
-    @JoinColumn(name = "city_id")
-    private City city;
 }
