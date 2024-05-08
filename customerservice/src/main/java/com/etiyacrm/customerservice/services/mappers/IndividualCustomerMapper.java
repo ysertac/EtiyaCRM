@@ -12,22 +12,22 @@ import org.mapstruct.factory.Mappers;
 public interface IndividualCustomerMapper {
     IndividualCustomerMapper INSTANCE = Mappers.getMapper(IndividualCustomerMapper.class);
 
-    @Mapping(source = "individualCustomer.customer.email", target = "email")
+    //@Mapping(source = "individualCustomer.customer.id", target = "customerId")
     GetAllIndividualCustomerResponse getAllIndividualCustomerResponseFromIndividualCustomer(IndividualCustomer individualCustomer);
 
-    @Mapping(source = "individualCustomer.customer.email", target = "email")
+    //@Mapping(source = "individualCustomer.customer.id", target = "customerId")
     GetIndividualCustomerResponse getIndividualCustomerFromIndividualCustomer(IndividualCustomer individualCustomer);
 
     IndividualCustomer individualCustomerFromCreateIndividualCustomerRequest(CreateIndividualCustomerRequest createIndividualCustomerRequest);
 
     IndividualCustomer individualCustomerFromUpdateIndividualCustomerRequest(UpdateIndividualCustomerRequest updateIndividualCustomerRequest);
 
-    @Mapping(source = "individualCustomer.customer.email", target = "email")
+    @Mapping(source = "individualCustomer.customer.id", target = "customerId")
     CreatedIndividualCustomerResponse createdIndividualCustomerResponseFromIndividualCustomer(IndividualCustomer individualCustomer);
 
-    @Mapping(source = "individualCustomer.customer.email", target = "email")
+    //@Mapping(source = "individualCustomer.customer.id", target = "customerId")
     UpdatedIndividualCustomerResponse updatedIndividualCustomerResponseFromIndividualCustomer(IndividualCustomer individualCustomer);
 
-    @Mapping(source = "individualCustomer.customer.email", target = "email")
+    //@Mapping(source = "individualCustomer.customer.email", target = "email")
     DeletedIndividualCustomerResponse deleteIndividualCustomerResponseFromIndividualCustomer(IndividualCustomer individualCustomer);
 }

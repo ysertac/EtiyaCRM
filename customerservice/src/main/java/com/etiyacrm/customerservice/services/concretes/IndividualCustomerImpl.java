@@ -28,7 +28,6 @@ public class IndividualCustomerImpl implements IndividualCustomerService {
         individualCustomerBusinessRules.individualCustomerNationalityIdCannotBeDuplicated(createIndividualCustomerRequest.getNationalityId());
 
         Customer customer = new Customer();
-        customer.setEmail(createIndividualCustomerRequest.getEmail());
         customer.setCreatedDate(LocalDateTime.now());
 
         IndividualCustomer individualCustomer =
@@ -72,7 +71,6 @@ public class IndividualCustomerImpl implements IndividualCustomerService {
 
         individualCustomer.setId(id);
         individualCustomer.setCustomer(foundIndividualCustomer.getCustomer());
-        individualCustomer.getCustomer().setEmail(updateIndividualCustomerRequest.getEmail());
         individualCustomer.getCustomer().setUpdatedDate(LocalDateTime.now());
         IndividualCustomer updatedIndividualCustomer = individualCustomerRepository.save(individualCustomer);
 

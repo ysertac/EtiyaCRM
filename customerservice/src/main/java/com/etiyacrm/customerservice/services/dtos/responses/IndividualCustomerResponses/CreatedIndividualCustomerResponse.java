@@ -10,10 +10,11 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreatedIndividualCustomerResponse {
+    private long id;
+    private long customerId;
     private String firstName;
     private String middleName;
     private String lastName;
-    private String email;
     private String gender;
     private String motherName;
     private String fatherName;

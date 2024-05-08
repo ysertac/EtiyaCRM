@@ -13,7 +13,6 @@ public class DeletedIndividualCustomerResponse {
     private String firstName;
     private String middleName;
     private String lastName;
-    private String email;
     private String gender;
     private String motherName;
     private String fatherName;
