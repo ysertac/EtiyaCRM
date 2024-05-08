@@ -8,7 +8,7 @@ import com.etiyacrm.customerservice.services.dtos.requests.addressRequests.Updat
 import com.etiyacrm.customerservice.services.dtos.responses.addressResponses.*;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
+@CrossOrigin("*")
 @RestController
 @RequestMapping("customerservice/api/v1/addresses")
 @AllArgsConstructor

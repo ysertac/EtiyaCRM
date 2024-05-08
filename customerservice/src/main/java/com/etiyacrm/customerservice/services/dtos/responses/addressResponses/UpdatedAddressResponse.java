@@ -2,7 +2,13 @@ package com.etiyacrm.customerservice.services.dtos.responses.addressResponses;
 
 import com.etiyacrm.customerservice.entities.City;
 import com.etiyacrm.customerservice.entities.Customer;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class UpdatedAddressResponse {
     private long id;
     private String description;
@@ -10,6 +16,6 @@ public class UpdatedAddressResponse {
     private String houseNumber;
     private String district;
     private String street;
-    private City city;
-    private Customer customer;
+    private long cityId;
+    private long customerId;
 }

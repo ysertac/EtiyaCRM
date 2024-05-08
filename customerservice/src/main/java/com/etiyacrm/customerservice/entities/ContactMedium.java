@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "contact_medium")
 public class ContactMedium extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
 
@@ -29,7 +29,7 @@ public class ContactMedium extends BaseEntity {
     @Column(name = "fax")
     private String fax;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
 }

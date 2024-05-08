@@ -9,7 +9,7 @@ import com.etiyacrm.customerservice.services.dtos.responses.CityResponses.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
+@CrossOrigin("*")
 @RestController
 @RequestMapping("customerservice/api/v1/cities")
 @AllArgsConstructor

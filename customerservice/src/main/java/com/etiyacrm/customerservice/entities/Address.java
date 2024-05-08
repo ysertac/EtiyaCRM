@@ -18,7 +18,7 @@ public class Address extends BaseEntity {
     private long id;
 
     @Column(name = "description")
-    private String descripion;
+    private String description;
 
     @Column(name = "neighbourhood")
     private String neighbourhood;
