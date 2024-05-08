@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateContactMediumRequest {
-    private long id;
     private String email;
     private String homePhone;
     private String mobilePhone;
