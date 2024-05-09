@@ -1,6 +1,4 @@
 /Common/.gitignore
-/Common/src/main/resources/application.properties
-/Common/src/main/java/com/etiya/common/CommonApplication.java
 /Common/src/test/java/com/etiya/common/CommonApplicationTests.java
 /Common/.mvn/wrapper/maven-wrapper.jar
 /Common/.mvn/wrapper/maven-wrapper.properties
