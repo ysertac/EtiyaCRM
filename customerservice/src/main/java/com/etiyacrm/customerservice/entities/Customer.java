@@ -15,9 +15,8 @@ import java.util.List;
 @NoArgsConstructor
 public class Customer extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private String id;
 
     @OneToOne(mappedBy = "customer")
     private IndividualCustomer individualCustomer;

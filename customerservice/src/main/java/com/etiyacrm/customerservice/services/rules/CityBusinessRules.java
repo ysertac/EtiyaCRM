@@ -24,7 +24,7 @@ public class CityBusinessRules {
         }
     }
 
-    public void cityNotFound(long id) {
+    public void cityNotFound(String id) {
         Optional<City> city = cityRepository.findById(id);
 
         if (city.isEmpty()) {
@@ -32,7 +32,7 @@ public class CityBusinessRules {
         }
     }
 
-    public void cityIsDeleted(long id) {
+    public void cityIsDeleted(String id) {
         Optional<City> city = cityRepository.findById(id);
 
         if (city.isPresent() && city.get().getDeletedDate() != null) {

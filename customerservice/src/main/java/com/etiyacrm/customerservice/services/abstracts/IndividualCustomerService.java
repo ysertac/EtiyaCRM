@@ -9,7 +9,7 @@ import java.util.List;
 public interface IndividualCustomerService {
     CreatedIndividualCustomerResponse add(CreateIndividualCustomerRequest createIndividualCustomerRequest);
     List<GetAllIndividualCustomerResponse> findAll();
-    GetIndividualCustomerResponse findById(long id);
-    UpdatedIndividualCustomerResponse update(UpdateIndividualCustomerRequest updateIndividualCustomerRequest, long id);
-    DeletedIndividualCustomerResponse delete(long id);
+    GetIndividualCustomerResponse findById(String id);
+    UpdatedIndividualCustomerResponse update(UpdateIndividualCustomerRequest updateIndividualCustomerRequest, String id);
+    DeletedIndividualCustomerResponse delete(String id);
 }

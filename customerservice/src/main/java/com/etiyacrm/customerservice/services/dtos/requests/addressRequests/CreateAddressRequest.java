@@ -13,6 +13,6 @@ public class CreateAddressRequest {
     private String houseNumber;
     private String district;
     private String street;
-    private long cityId;
-    private long customerId;
+    private String cityId;
+    private String customerId;
 }

@@ -29,18 +29,18 @@ public class ContactMediumController {
     }
 
     @GetMapping("/{id}")
-    public GetContactMediumResponse findById(@PathVariable long id) {
+    public GetContactMediumResponse findById(@PathVariable String id) {
         return contactMediumService.findById(id);
     }
 
     @PutMapping("/{id}")
     public UpdatedContactMediumResponse update(
-            @RequestBody UpdateContactMediumRequest updateContactMediumRequest, @PathVariable long id) {
+            @RequestBody UpdateContactMediumRequest updateContactMediumRequest, @PathVariable String id) {
         return contactMediumService.update(updateContactMediumRequest, id);
     }
 
     @DeleteMapping("/{id}")
-    public DeletedContactMediumResponse delete(@PathVariable long id) {
+    public DeletedContactMediumResponse delete(@PathVariable String id) {
         return contactMediumService.delete(id);
     }
 }

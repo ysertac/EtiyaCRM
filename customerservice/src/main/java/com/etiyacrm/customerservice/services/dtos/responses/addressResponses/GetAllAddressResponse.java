@@ -10,12 +10,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GetAllAddressResponse {
-    private long id;
+    private String id;
     private String description;
     private String neighbourhood;
     private String houseNumber;
     private String district;
     private String street;
-    private long cityId;
-    private long customerId;
+    private String cityId;
+    private String customerId;
 }

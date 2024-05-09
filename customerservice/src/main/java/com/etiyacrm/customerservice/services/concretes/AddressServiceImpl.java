@@ -20,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,7 +44,7 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public GetAddressResponse getById(long id) {
+    public GetAddressResponse getById(String id) {
         Address foundAddress = addressRepository.findById(id).get();
         GetAddressResponse getAddressResponse = AddressMapper.INSTANCE.getAddressResponseFromAddress(foundAddress);
         return getAddressResponse;
@@ -54,7 +55,7 @@ public class AddressServiceImpl implements AddressService {
         Address address =
                 AddressMapper.INSTANCE.addressFromCreateAddressRequest(createAddressRequest);
         address.setCreatedDate(LocalDateTime.now());
-
+        address.setId(UUID.randomUUID().toString());
         Address createdAddress = addressRepository.save(address);
         CreatedAddressResponse createdAddressResponse =
                 AddressMapper.INSTANCE.createdAddressResponseFromAddress(createdAddress);
@@ -62,7 +63,7 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public UpdatedAddressResponse update(UpdateAddressRequest updateAddressRequest, long id) {
+    public UpdatedAddressResponse update(UpdateAddressRequest updateAddressRequest, String id) {
         Address foundAddress = addressRepository.findById(id).get();
 
         Address address =
@@ -78,7 +79,7 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public DeletedAddressResponse delete(long id) {
+    public DeletedAddressResponse delete(String id) {
         Address foundAddress = addressRepository.findById(id).get();
         foundAddress.setDeletedDate(LocalDateTime.now());
         Address deletedAddress = addressRepository.save(foundAddress);

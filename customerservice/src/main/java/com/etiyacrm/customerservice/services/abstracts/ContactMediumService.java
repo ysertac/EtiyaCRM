@@ -13,9 +13,9 @@ public interface ContactMediumService {
 
     List<GetAllContactMediumResponse> findAll();
 
-    GetContactMediumResponse findById(long id);
+    GetContactMediumResponse findById(String id);
 
-    UpdatedContactMediumResponse update(UpdateContactMediumRequest updateContactMediumRequest, long id);
+    UpdatedContactMediumResponse update(UpdateContactMediumRequest updateContactMediumRequest, String id);
 
-    DeletedContactMediumResponse delete(long id);
+    DeletedContactMediumResponse delete(String id);
 }

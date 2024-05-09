@@ -15,9 +15,8 @@ import java.util.List;
 @Data
 public class City extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private String id;
 
     @Column(name = "name")
     private String name;

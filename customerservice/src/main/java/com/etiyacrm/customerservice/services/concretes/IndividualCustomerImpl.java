@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,14 +30,15 @@ public class IndividualCustomerImpl implements IndividualCustomerService {
     @Override
     public CreatedIndividualCustomerResponse add(CreateIndividualCustomerRequest createIndividualCustomerRequest) {
         individualCustomerBusinessRules.individualCustomerNationalityIdCannotBeDuplicated(createIndividualCustomerRequest.getNationalityId());
-
+        final String customerId = UUID.randomUUID().toString();
         Customer customer = new Customer();
+        customer.setId(customerId);
         customer.setCreatedDate(LocalDateTime.now());
 
         IndividualCustomer individualCustomer =
                 IndividualCustomerMapper.INSTANCE.individualCustomerFromCreateIndividualCustomerRequest(createIndividualCustomerRequest);
         individualCustomer.setCustomer(customer);
-
+        individualCustomer.setId(customerId);
         IndividualCustomer createdCustomer = individualCustomerRepository.save(individualCustomer);
 
         CreatedIndividualCustomerResponse createdIndividualCustomerResponse =
@@ -59,9 +61,8 @@ public class IndividualCustomerImpl implements IndividualCustomerService {
     }
 
     @Override
-    public GetIndividualCustomerResponse findById(long id) {
+    public GetIndividualCustomerResponse findById(String id) {
         individualCustomerBusinessRules.individualCustomerIdMustExist(id);
-        //individualCustomerBusinessRules.deletedIndividualCustomer(id);
 
         IndividualCustomer foundIndividualCustomer = individualCustomerRepository.findById(id).get();
 
@@ -69,7 +70,7 @@ public class IndividualCustomerImpl implements IndividualCustomerService {
     }
 
     @Override
-    public UpdatedIndividualCustomerResponse update(UpdateIndividualCustomerRequest updateIndividualCustomerRequest, long id) {
+    public UpdatedIndividualCustomerResponse update(UpdateIndividualCustomerRequest updateIndividualCustomerRequest, String id) {
         //individualCustomerBusinessRules.deletedIndividualCustomer(id);
         individualCustomerBusinessRules.individualCustomerIdMustExist(id);
 
@@ -86,7 +87,7 @@ public class IndividualCustomerImpl implements IndividualCustomerService {
     }
 
     @Override
-    public DeletedIndividualCustomerResponse delete(long id) {
+    public DeletedIndividualCustomerResponse delete(String id) {
         individualCustomerBusinessRules.individualCustomerIdMustExist(id);
         //individualCustomerBusinessRules.deletedIndividualCustomer(id);
 

@@ -8,8 +8,8 @@ import com.etiyacrm.customerservice.services.dtos.responses.addressResponses.*;
 
 public interface AddressService {
     GetListResponse<GetAllAddressResponse> getAll(PageInfo pageInfo);
-    GetAddressResponse getById(long id);
+    GetAddressResponse getById(String id);
     CreatedAddressResponse add(CreateAddressRequest createAddressRequest);
-    UpdatedAddressResponse update(UpdateAddressRequest updateAddressRequest, long id);
-    DeletedAddressResponse delete(long id);
+    UpdatedAddressResponse update(UpdateAddressRequest updateAddressRequest, String id);
+    DeletedAddressResponse delete(String id);
 }

@@ -14,8 +14,7 @@ import lombok.NoArgsConstructor;
 public class Address extends BaseEntity {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private String id;
 
     @Column(name = "description")
     private String description;

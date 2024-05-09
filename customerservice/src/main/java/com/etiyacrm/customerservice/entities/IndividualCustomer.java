@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.UUID;
 
 import java.time.LocalDate;
 
@@ -14,9 +15,8 @@ import java.time.LocalDate;
 @Table(name = "individual_customers")
 public class IndividualCustomer {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private String id;
 
     @Column(name = "first_name")
     private String firstName;

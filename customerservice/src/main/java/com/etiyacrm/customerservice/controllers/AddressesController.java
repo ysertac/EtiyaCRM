@@ -26,17 +26,17 @@ public class AddressesController {
     }
 
     @GetMapping("/{id}")
-    public GetAddressResponse getById(@PathVariable long id){
+    public GetAddressResponse getById(@PathVariable String id){
         return addressService.getById(id);
     }
 
     @PutMapping("/{id}")
-    public UpdatedAddressResponse update(@RequestBody UpdateAddressRequest updateAddressRequest, @PathVariable long id){
+    public UpdatedAddressResponse update(@RequestBody UpdateAddressRequest updateAddressRequest, @PathVariable String id){
         return addressService.update(updateAddressRequest, id);
     }
 
     @DeleteMapping("/{id}")
-    public DeletedAddressResponse delete(@PathVariable long id){
+    public DeletedAddressResponse delete(@PathVariable String id){
         return addressService.delete(id);
     }
 

@@ -23,7 +23,7 @@ public class IndividualCustomerBusinessRules {
         }
     }
 
-    public void individualCustomerIdMustExist(long id) {
+    public void individualCustomerIdMustExist(String id) {
         Optional<IndividualCustomer> individualCustomer = individualCustomerRepository.findById(id);
         if(!individualCustomer.isPresent() || individualCustomer.get().getCustomer().getDeletedDate() != null) {
             throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.INDIVIDUAL_CUSTOMER_NOT_FOUND));

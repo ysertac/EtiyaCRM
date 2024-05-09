@@ -13,9 +13,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "contact_medium")
 public class ContactMedium extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private String id;
 
     @Column(name = "email")
     private String email;

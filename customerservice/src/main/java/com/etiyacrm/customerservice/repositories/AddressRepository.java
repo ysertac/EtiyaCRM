@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-public interface AddressRepository extends JpaRepository<Address, Long> {
+public interface AddressRepository extends JpaRepository<Address, String> {
     @Query(value = "SELECT * FROM addresses WHERE deleted_date IS null", nativeQuery = true)
     Page<Address> findAllIfDeletedDateIsNull(Pageable pageable);
 }

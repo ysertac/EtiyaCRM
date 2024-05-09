@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 import java.util.Optional;
 
-public interface CityRepository extends JpaRepository<City, Long> {
+public interface CityRepository extends JpaRepository<City, String> {
     Optional<City> findByNameIgnoreCase(String name);
     @Query(value = "SELECT * FROM cities WHERE deleted_date IS null", nativeQuery = true)
     Page<City> findAllIfDeletedDateIsNull(Pageable pageable);

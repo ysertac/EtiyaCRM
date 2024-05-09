@@ -17,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,7 +41,7 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public GetCityResponse getById(long id) {
+    public GetCityResponse getById(String id) {
         cityBusinessRules.cityNotFound(id);
         cityBusinessRules.cityIsDeleted(id);
 
@@ -54,6 +55,7 @@ public class CityServiceImpl implements CityService {
         cityBusinessRules.cityNameCanNotBeDuplicated(createCityRequest.getName());
 
         City city = CityMapper.INSTANCE.cityFromCreateCityRequest(createCityRequest);
+        city.setId(UUID.randomUUID().toString());
         city.setCreatedDate(LocalDateTime.now());
         City createdCity = cityRepository.save(city);
 
@@ -61,7 +63,7 @@ public class CityServiceImpl implements CityService {
         return createdCityResponse;
     }
 
-    public UpdatedCityResponse update(UpdateCityRequest updateCityRequest, long id) {
+    public UpdatedCityResponse update(UpdateCityRequest updateCityRequest, String id) {
         cityBusinessRules.cityNotFound(id);
         cityBusinessRules.cityIsDeleted(id);
         cityBusinessRules.cityNameCanNotBeDuplicated(updateCityRequest.getName());
@@ -79,7 +81,7 @@ public class CityServiceImpl implements CityService {
         return updatedCityResponse;
     }
 
-    public DeletedCityResponse delete(long id) {
+    public DeletedCityResponse delete(String id) {
         cityBusinessRules.cityIsDeleted(id);
         cityBusinessRules.cityIsDeleted(id);
 

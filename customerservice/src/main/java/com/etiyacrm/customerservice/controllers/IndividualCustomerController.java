@@ -26,18 +26,18 @@ public class IndividualCustomerController {
     }
 
     @GetMapping("/{id}")
-    public GetIndividualCustomerResponse findById(@PathVariable long id) {
+    public GetIndividualCustomerResponse findById(@PathVariable String id) {
         return individualCustomerService.findById(id);
     }
 
     @PutMapping("/{id}")
     public UpdatedIndividualCustomerResponse update(
-            @RequestBody UpdateIndividualCustomerRequest updateIndividualCustomerRequest, @PathVariable long id) {
+            @RequestBody UpdateIndividualCustomerRequest updateIndividualCustomerRequest, @PathVariable String id) {
         return individualCustomerService.update(updateIndividualCustomerRequest, id);
     }
 
     @DeleteMapping("/{id}")
-    public DeletedIndividualCustomerResponse delete(@PathVariable long id) {
+    public DeletedIndividualCustomerResponse delete(@PathVariable String id) {
         return individualCustomerService.delete(id);
     }
 }
