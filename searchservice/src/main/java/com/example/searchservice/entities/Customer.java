@@ -15,6 +15,21 @@ public class Customer {
     @Id
     private String id;
 
+    @Field(name = "customerId")
+    private String customerId;
+
     @Field(name = "firstName")
     private String firstName;
+
+    @Field(name = "middleName")
+    private String middleName;
+
+    @Field(name = "lastname")
+    private String lastname;
+
+    @Field(name = "mobilePhone")
+    private String mobilePhone;
+
+    @Field(name = "nationalityId")
+    private String nationalityId;
 }

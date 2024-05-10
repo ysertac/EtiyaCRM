@@ -1,5 +1,6 @@
 package com.etiyacrm.customerservice.services.concretes;
 
+import com.etiya.common.events.CustomerCreatedEvent;
 import com.etiyacrm.customerservice.core.business.paging.PageInfo;
 import com.etiyacrm.customerservice.core.responses.GetListResponse;
 import com.etiyacrm.customerservice.entities.Address;

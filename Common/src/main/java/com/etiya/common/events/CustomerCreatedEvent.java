@@ -8,6 +8,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CustomerCreatedEvent {
-    private String id;
+    private String customerId;
     private String firstName;
+    private String middleName;
+    private String lastname;
+    private String mobilePhone;
+    private String nationalityId;
 }
