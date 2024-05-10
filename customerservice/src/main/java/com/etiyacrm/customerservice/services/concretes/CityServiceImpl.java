@@ -48,7 +48,7 @@ public class CityServiceImpl implements CityService {
         City foundCity = cityRepository.findById(id).get();
         GetCityResponse getCityResponse = CityMapper.INSTANCE.getCityResponseFromCity(foundCity);
         return getCityResponse;
-    }
+    } // d
 
     @Override
     public CreatedCityResponse add(CreateCityRequest createCityRequest) {
