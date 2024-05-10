@@ -12,5 +12,5 @@ public class UpdateContactMediumRequest {
     private String homePhone;
     private String mobilePhone;
     private String fax;
-    //private String customerId;
+    private String customerId;
 }

@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RestControllerAdvice
+//@RestControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler({BusinessException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
