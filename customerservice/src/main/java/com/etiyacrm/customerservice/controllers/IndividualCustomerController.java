@@ -16,7 +16,7 @@ public class IndividualCustomerController {
     private IndividualCustomerService individualCustomerService;
 
     @PostMapping
-    public CreatedIndividualCustomerResponse add(@RequestBody CreateIndividualCustomerRequest createIndividualCustomerRequest) {
+    public CreatedIndividualCustomerResponse add(@RequestBody CreateIndividualCustomerRequest createIndividualCustomerRequest) throws Exception {
         return individualCustomerService.add(createIndividualCustomerRequest);
     }
 

@@ -7,7 +7,7 @@ import com.etiyacrm.customerservice.services.dtos.responses.IndividualCustomerRe
 import java.util.List;
 
 public interface IndividualCustomerService {
-    CreatedIndividualCustomerResponse add(CreateIndividualCustomerRequest createIndividualCustomerRequest);
+    CreatedIndividualCustomerResponse add(CreateIndividualCustomerRequest createIndividualCustomerRequest) throws Exception;
     List<GetAllIndividualCustomerResponse> findAll();
     GetIndividualCustomerResponse findById(String id);
     UpdatedIndividualCustomerResponse update(UpdateIndividualCustomerRequest updateIndividualCustomerRequest, String id);
