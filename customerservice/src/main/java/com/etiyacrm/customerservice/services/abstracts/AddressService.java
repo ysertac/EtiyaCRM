@@ -6,8 +6,10 @@ import com.etiyacrm.customerservice.services.dtos.requests.addressRequests.Creat
 import com.etiyacrm.customerservice.services.dtos.requests.addressRequests.UpdateAddressRequest;
 import com.etiyacrm.customerservice.services.dtos.responses.addressResponses.*;
 
+import java.util.Optional;
+
 public interface AddressService {
-    GetListResponse<GetAllAddressResponse> getAll(PageInfo pageInfo);
+    GetListResponse<GetAllAddressResponse> getAll(PageInfo pageInfo, Optional<String> customerId);
     GetAddressResponse getById(String id);
     CreatedAddressResponse add(CreateAddressRequest createAddressRequest);
     UpdatedAddressResponse update(UpdateAddressRequest updateAddressRequest, String id);
