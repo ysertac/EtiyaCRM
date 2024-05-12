@@ -8,6 +8,9 @@ import com.etiyacrm.customerservice.services.dtos.requests.addressRequests.Updat
 import com.etiyacrm.customerservice.services.dtos.responses.addressResponses.*;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
+
 @CrossOrigin("*")
 @RestController
 @RequestMapping("customerservice/api/v1/addresses")
@@ -21,8 +24,10 @@ public class AddressesController {
     }
 
     @GetMapping
-    public GetListResponse<GetAllAddressResponse> getAll(@RequestParam int page, @RequestParam int size){
-        return addressService.getAll(new PageInfo(page,size));
+    public GetListResponse<GetAllAddressResponse> getAll(@RequestParam int page,
+                                                         @RequestParam int size,
+                                                         @RequestParam Optional<String> customerId){
+        return addressService.getAll(new PageInfo(page,size),customerId);
     }
 
     @GetMapping("/{id}")
