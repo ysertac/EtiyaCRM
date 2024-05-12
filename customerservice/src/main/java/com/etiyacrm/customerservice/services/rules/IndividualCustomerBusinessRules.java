@@ -1,5 +1,6 @@
 package com.etiyacrm.customerservice.services.rules;
 
+import com.etiyacrm.customerservice.adapters.CustomerCheckService;
 import com.etiyacrm.customerservice.core.business.abstracts.MessageService;
 import com.etiyacrm.customerservice.core.crossCuttingConcerns.exceptions.types.BusinessException;
 import com.etiyacrm.customerservice.entities.IndividualCustomer;
@@ -15,6 +16,7 @@ import java.util.Optional;
 public class IndividualCustomerBusinessRules {
     private MessageService messageService;
     private IndividualCustomerRepository individualCustomerRepository;
+    private CustomerCheckService customerCheckService;
 
     public void individualCustomerNationalityIdCannotBeDuplicated(String nationalityId) {
         Optional<IndividualCustomer> individualCustomer = individualCustomerRepository.findByNationalityId(nationalityId);
@@ -36,4 +38,14 @@ public class IndividualCustomerBusinessRules {
             throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.INDIVIDUAL_CUSTOMER_IS_DELETED));
         }
     }*/
+
+    public void checkIdNationalIdentityExists(String nationalityId,
+                                              String firstName,
+                                              String lastName,
+                                              int birthDate) throws Exception {
+        if(!customerCheckService.checkIfRealPerson(nationalityId, firstName, lastName, birthDate)){
+            throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.IDENTITY_NUMBER_NOT_EXISTS));
+        }
+    }
+
 }

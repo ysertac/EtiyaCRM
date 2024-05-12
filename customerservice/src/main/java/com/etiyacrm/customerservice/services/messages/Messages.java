@@ -8,5 +8,6 @@ public class Messages {
         public static final String NATIONALITY_ID_EXISTS = "nationalityIdExists";
         public static final String INDIVIDUAL_CUSTOMER_NOT_FOUND = "individualCustomerNotFound";
         public static final String INDIVIDUAL_CUSTOMER_IS_DELETED = "individualCustomerIsDeleted";
+        public static final String IDENTITY_NUMBER_NOT_EXISTS =  "identityNumberNotExists";
     }
 }

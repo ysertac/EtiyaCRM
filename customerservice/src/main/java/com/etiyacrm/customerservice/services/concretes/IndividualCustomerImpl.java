@@ -28,7 +28,11 @@ public class IndividualCustomerImpl implements IndividualCustomerService {
     private IndividualCustomerBusinessRules individualCustomerBusinessRules;
 
     @Override
-    public CreatedIndividualCustomerResponse add(CreateIndividualCustomerRequest createIndividualCustomerRequest) {
+    public CreatedIndividualCustomerResponse add(CreateIndividualCustomerRequest createIndividualCustomerRequest) throws Exception {
+        individualCustomerBusinessRules.checkIdNationalIdentityExists(createIndividualCustomerRequest.getNationalityId(),
+                createIndividualCustomerRequest.getFirstName(),
+                createIndividualCustomerRequest.getLastName(),
+                createIndividualCustomerRequest.getBirthDate().getYear());
         individualCustomerBusinessRules.individualCustomerNationalityIdCannotBeDuplicated(createIndividualCustomerRequest.getNationalityId());
         final String customerId = UUID.randomUUID().toString();
         Customer customer = new Customer();
