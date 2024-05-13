@@ -18,16 +18,6 @@ public class SearchCustomerController {
 
     @PostMapping
     public List<PostSearchCustomerResponse> searchCustomer(@RequestBody PostSearchCustomerRequest postSearchCustomerRequest) {
-        PostSearchCustomerResponse postSearchCustomerResponse = new PostSearchCustomerResponse();
-        postSearchCustomerResponse.setCustomerId(postSearchCustomerRequest.getCustomerId());
-        postSearchCustomerResponse.setFirstName(postSearchCustomerRequest.getFirstName());
-        postSearchCustomerResponse.setLastName(postSearchCustomerRequest.getLastName());
-        postSearchCustomerResponse.setMobilePhone(postSearchCustomerRequest.getMobilePhone());
-        postSearchCustomerResponse.setOrderNumber(postSearchCustomerRequest.getOrderNumber());
-        postSearchCustomerResponse.setNationalityId(postSearchCustomerRequest.getNationalityId());
-        postSearchCustomerResponse.setAccountNumber(postSearchCustomerRequest.getAccountNumber());
-        List postSearchCustomerResponseList = new ArrayList();
-        postSearchCustomerResponseList.add(postSearchCustomerResponse);
-        return postSearchCustomerResponseList;
+        return filterService.searchCustomers(postSearchCustomerRequest);
     }
 }
