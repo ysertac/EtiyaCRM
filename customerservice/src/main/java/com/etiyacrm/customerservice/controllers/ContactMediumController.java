@@ -7,6 +7,7 @@ import com.etiyacrm.customerservice.services.dtos.requests.individualCustomerReq
 import com.etiyacrm.customerservice.services.dtos.requests.individualCustomerRequests.UpdateIndividualCustomerRequest;
 import com.etiyacrm.customerservice.services.dtos.responses.IndividualCustomerResponses.*;
 import com.etiyacrm.customerservice.services.dtos.responses.contactMediumResponses.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class ContactMediumController {
     private ContactMediumService contactMediumService;
 
     @PostMapping
-    public CreatedContactMediumResponse add(@RequestBody CreateContactMediumRequest createContactMediumRequest) {
+    public CreatedContactMediumResponse add(@Valid @RequestBody CreateContactMediumRequest createContactMediumRequest) {
         return contactMediumService.add(createContactMediumRequest);
     }
 

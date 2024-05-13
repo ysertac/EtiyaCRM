@@ -4,6 +4,7 @@ import com.etiyacrm.customerservice.services.abstracts.IndividualCustomerService
 import com.etiyacrm.customerservice.services.dtos.requests.individualCustomerRequests.CreateIndividualCustomerRequest;
 import com.etiyacrm.customerservice.services.dtos.requests.individualCustomerRequests.UpdateIndividualCustomerRequest;
 import com.etiyacrm.customerservice.services.dtos.responses.IndividualCustomerResponses.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,7 @@ public class IndividualCustomerController {
     private IndividualCustomerService individualCustomerService;
 
     @PostMapping
-    public CreatedIndividualCustomerResponse add(@RequestBody CreateIndividualCustomerRequest createIndividualCustomerRequest) throws Exception {
+    public CreatedIndividualCustomerResponse add(@Valid @RequestBody CreateIndividualCustomerRequest createIndividualCustomerRequest) throws Exception {
         return individualCustomerService.add(createIndividualCustomerRequest);
     }
 
