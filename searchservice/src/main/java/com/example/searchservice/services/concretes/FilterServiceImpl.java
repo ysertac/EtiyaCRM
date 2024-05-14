@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -22,8 +23,9 @@ public class FilterServiceImpl implements FilterService {
     }
 
     @Override
-    public List<PostSearchCustomerResponse> searchCustomers(String customerId, String nationalityId, String accountNumber, String mobilePhone,
-                                                            String firstName, String lastName, String orderNumber) {
+    public List<PostSearchCustomerResponse> searchCustomers(Optional<String> customerId,  Optional<String> nationalityId,
+                                                            Optional<String> accountNumber,  Optional<String> mobilePhone,
+                                                            Optional<String> firstName,  Optional<String> lastName,  Optional<String> orderNumber) {
 
         List<Customer> customers = this.filterRepository.getFilteredCustomers(customerId, nationalityId, accountNumber,
                 mobilePhone, firstName, lastName, orderNumber);
@@ -36,11 +38,10 @@ public class FilterServiceImpl implements FilterService {
             PostSearchCustomerResponse postSearchCustomerResponse = new PostSearchCustomerResponse();
             postSearchCustomerResponse.setCustomerId(customer.getCustomerId());
             postSearchCustomerResponse.setNationalityId(customer.getNationalityId());
-            postSearchCustomerResponse.setAccountNumber("1234567");
-            postSearchCustomerResponse.setMobilePhone(customer.getMobilePhone());
+            postSearchCustomerResponse.setRole("customer");
             postSearchCustomerResponse.setFirstName(customer.getFirstName());
-            postSearchCustomerResponse.setLastName(customer.getLastname());
-            postSearchCustomerResponse.setOrderNumber("987654");
+            postSearchCustomerResponse.setMiddleName(customer.getMiddleName());
+            postSearchCustomerResponse.setLastName(customer.getLastName());
             filteredCustomers.add(postSearchCustomerResponse);
         }
         return filteredCustomers;

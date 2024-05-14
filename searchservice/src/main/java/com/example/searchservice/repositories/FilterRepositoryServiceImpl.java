@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public class FilterRepositoryServiceImpl implements FilterRepositoryService {
 
@@ -14,29 +15,18 @@ public class FilterRepositoryServiceImpl implements FilterRepositoryService {
     private MongoTemplate mongoTemplate;
 
     @Override
-    public List<Customer> getFilteredCustomers(String customerId, String nationalityId, String accountNumber, String mobilePhone, String firstName, String lastName, String orderNumber) {
+    public List<Customer> getFilteredCustomers(Optional<String> customerId, Optional<String> nationalityId,
+                                               Optional<String> accountNumber, Optional<String> mobilePhone, Optional<String> firstName,
+                                               Optional<String> lastName, Optional<String> orderNumber) {
         Query query = new Query();
-        if (customerId != null) {
-            query.addCriteria(Criteria.where("customerId").is(customerId));
-        }
-        if (nationalityId != null) {
-            query.addCriteria(Criteria.where("nationalityId").is(nationalityId));
-        }
-        if (accountNumber != null) {
-            query.addCriteria(Criteria.where("accountNumber").is(accountNumber));
-        }
-        if (mobilePhone != null) {
-            query.addCriteria(Criteria.where("mobilePhone").is(mobilePhone));
-        }
-        if (firstName != null) {
-            query.addCriteria(Criteria.where("firstName").is(firstName));
-        }
-        if (lastName != null) {
-            query.addCriteria(Criteria.where("lastName").is(lastName));
-        }
-        if (orderNumber != null) {
-            query.addCriteria(Criteria.where("orderNumber").is(orderNumber));
-        }
+        customerId.ifPresent(s -> query.addCriteria(Criteria.where("customerId").is(s)));
+        nationalityId.ifPresent(s -> query.addCriteria(Criteria.where("nationalityId").is(s)));
+        accountNumber.ifPresent(s -> query.addCriteria(Criteria.where("accountNumber").is(s)));
+        mobilePhone.ifPresent(s -> query.addCriteria(Criteria.where("mobilePhone").is(s)));
+        firstName.ifPresent(s -> query.addCriteria(Criteria.where("firstName").regex("^" + s + "$", "i")));
+        lastName.ifPresent(s -> query.addCriteria(Criteria.where("lastName").regex("^" + s + "$", "i")));
+        orderNumber.ifPresent(s -> query.addCriteria(Criteria.where("orderNumber").is(s)));
+
         return mongoTemplate.find(query, Customer.class);
     }
 }

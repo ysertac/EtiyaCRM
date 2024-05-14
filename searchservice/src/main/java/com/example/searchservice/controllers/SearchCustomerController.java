@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin("*")
 @RestController
@@ -18,13 +19,13 @@ public class SearchCustomerController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<PostSearchCustomerResponse> searchCustomer(
-            @RequestParam(required = false) String customerId,
-            @RequestParam(required = false) String nationalityId,
-            @RequestParam(required = false) String accountNumber,
-            @RequestParam(required = false) String mobilePhone,
-            @RequestParam(required = false) String firstName,
-            @RequestParam(required = false) String lastName,
-            @RequestParam(required = false) String orderNumber
+            Optional<String> customerId,
+            Optional<String> nationalityId,
+            Optional<String> accountNumber,
+            Optional<String> mobilePhone,
+            Optional<String> firstName,
+            Optional<String> lastName,
+            Optional<String> orderNumber
     ) {
         return filterService.searchCustomers(customerId, nationalityId, accountNumber, mobilePhone, firstName, lastName, orderNumber);
     }

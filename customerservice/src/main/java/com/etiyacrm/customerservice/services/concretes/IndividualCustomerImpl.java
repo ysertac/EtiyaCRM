@@ -29,8 +29,12 @@ public class IndividualCustomerImpl implements IndividualCustomerService {
 
     @Override
     public CreatedIndividualCustomerResponse add(CreateIndividualCustomerRequest createIndividualCustomerRequest) throws Exception {
+        String fullName = createIndividualCustomerRequest.getFirstName();
+        if (!createIndividualCustomerRequest.getMiddleName().isEmpty()) {
+            fullName += " " + createIndividualCustomerRequest.getMiddleName();
+        }
         individualCustomerBusinessRules.checkIdNationalIdentityExists(createIndividualCustomerRequest.getNationalityId(),
-                createIndividualCustomerRequest.getFirstName(),
+                fullName,
                 createIndividualCustomerRequest.getLastName(),
                 createIndividualCustomerRequest.getBirthDate().getYear());
         individualCustomerBusinessRules.individualCustomerNationalityIdCannotBeDuplicated(createIndividualCustomerRequest.getNationalityId());

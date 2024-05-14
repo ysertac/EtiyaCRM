@@ -21,7 +21,7 @@ public class CustomerCreatedConsumer {
         customer.setCustomerId(customerCreatedEvent.getCustomerId());
         customer.setFirstName(customerCreatedEvent.getFirstName());
         customer.setMiddleName(customerCreatedEvent.getMiddleName());
-        customer.setLastname(customerCreatedEvent.getLastname());
+        customer.setLastName(customerCreatedEvent.getLastname());
         customer.setNationalityId(customerCreatedEvent.getNationalityId());
         customer.setMobilePhone(customerCreatedEvent.getMobilePhone());
         LOGGER.info(String.format("Customer created event consumer => %s", customerCreatedEvent.toString()));
