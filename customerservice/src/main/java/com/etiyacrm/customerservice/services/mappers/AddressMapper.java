@@ -12,23 +12,35 @@ public interface AddressMapper {
     AddressMapper INSTANCE = Mappers.getMapper(AddressMapper.class);
     @Mapping(source = "address.customer.id", target = "customerId")
     @Mapping(source = "address.city.id", target = "cityId")
+    @Mapping(source = "address.district.id", target = "districtId")
     GetAllAddressResponse getAllAddressResponseFromAddress(Address address);
     @Mapping(source = "address.customer.id", target = "customerId")
     @Mapping(source = "address.city.id", target = "cityId")
+    @Mapping(source = "address.district.id", target = "districtId")
     GetAddressResponse getAddressResponseFromAddress(Address address);
     @Mapping(source = "createAddressRequest.customerId", target = "customer.id")
     @Mapping(source = "createAddressRequest.cityId", target = "city.id")
+    @Mapping(source = "createAddressRequest.districtId", target = "district.id")
     Address addressFromCreateAddressRequest(CreateAddressRequest createAddressRequest);
     @Mapping(source = "address.customer.id", target = "customerId")
     @Mapping(source = "address.city.id", target = "cityId")
+    @Mapping(source = "address.district.id", target = "districtId")
     CreatedAddressResponse createdAddressResponseFromAddress(Address address);
     @Mapping(source = "updateAddressRequest.customerId", target = "customer.id")
     @Mapping(source = "updateAddressRequest.cityId", target = "city.id")
+    @Mapping(source = "updateAddressRequest.districtId", target = "district.id")
     Address addressFromUpdateAddressRequest(UpdateAddressRequest updateAddressRequest);
     @Mapping(source = "address.customer.id", target = "customerId")
     @Mapping(source = "address.city.id", target = "cityId")
+    @Mapping(source = "address.district.id", target = "districtId")
     UpdatedAddressResponse updatedAddressResponseFromAddress(Address address);
     @Mapping(source = "address.customer.id", target = "customerId")
     @Mapping(source = "address.city.id", target = "cityId")
+    @Mapping(source = "address.district.id", target = "districtId")
     DeletedAddressResponse deletedAddressResponseFromAddress(Address address);
+    @Mapping(source = "address.customer.id", target = "customerId")
+    @Mapping(source = "address.city.id", target = "cityId")
+    @Mapping(source = "address.city.name", target = "cityName")
+    @Mapping(source = "address.district.id", target = "districtId")
+    GetAddressByCustomerIdResponse getAddressByCustomerIdResponseFromAddress(Address address);
 }

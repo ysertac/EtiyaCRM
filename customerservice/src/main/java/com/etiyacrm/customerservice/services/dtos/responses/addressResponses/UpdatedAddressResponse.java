@@ -14,7 +14,7 @@ public class UpdatedAddressResponse {
     private String description;
     private String neighbourhood;
     private String houseNumber;
-    private String district;
+    private String districtId;
     private String street;
     private String cityId;
     private String customerId;

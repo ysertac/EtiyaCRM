@@ -23,4 +23,7 @@ public class City extends BaseEntity {
 
     @OneToMany(mappedBy = "city")
     private List<Address> adresses;
+
+    @OneToMany(mappedBy = "city")
+    private List<District> districts;
 }
