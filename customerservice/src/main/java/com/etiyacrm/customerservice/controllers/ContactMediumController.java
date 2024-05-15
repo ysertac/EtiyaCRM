@@ -34,6 +34,11 @@ public class ContactMediumController {
         return contactMediumService.findById(id);
     }
 
+    @GetMapping("/customerid/{customerId}")
+    public GetContactMediumByCustomerIdResponse getByCustomerId(@PathVariable String customerId){
+        return contactMediumService.getByCustomerId(customerId);
+    }
+
     @PutMapping("/{id}")
     public UpdatedContactMediumResponse update(
             @RequestBody UpdateContactMediumRequest updateContactMediumRequest, @PathVariable String id) {
