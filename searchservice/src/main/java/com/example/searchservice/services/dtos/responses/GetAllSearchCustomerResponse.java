@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class PostSearchCustomerResponse {
+public class GetAllSearchCustomerResponse {
     String customerId;
     long customerNumber;
     String nationalityId;

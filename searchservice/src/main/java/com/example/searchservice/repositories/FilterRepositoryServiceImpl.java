@@ -2,6 +2,9 @@ package com.example.searchservice.repositories;
 
 import com.example.searchservice.entities.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -15,9 +18,9 @@ public class FilterRepositoryServiceImpl implements FilterRepositoryService {
     private MongoTemplate mongoTemplate;
 
     @Override
-    public List<Customer> getFilteredCustomers(Optional<Long> customerNumber, Optional<String> nationalityId,
+    public Page<Customer> getFilteredCustomers(Optional<Long> customerNumber, Optional<String> nationalityId,
                                                Optional<String> accountNumber, Optional<String> mobilePhone, Optional<String> firstName,
-                                               Optional<String> lastName, Optional<String> orderNumber) {
+                                               Optional<String> lastName, Optional<String> orderNumber, Pageable pageable) {
         Query query = new Query();
         customerNumber.ifPresent(s -> query.addCriteria(Criteria.where("customerNumber").is(s)));
         nationalityId.ifPresent(s -> query.addCriteria(Criteria.where("nationalityId").is(s)));
@@ -27,6 +30,11 @@ public class FilterRepositoryServiceImpl implements FilterRepositoryService {
         lastName.ifPresent(s -> query.addCriteria(Criteria.where("lastName").regex("^" + s + "$", "i")));
         orderNumber.ifPresent(s -> query.addCriteria(Criteria.where("orderNumber").is(s)));
 
-        return mongoTemplate.find(query, Customer.class);
+        List<Customer> customers;
+        customers = mongoTemplate.find(query, Customer.class);
+        query.with(pageable);
+        long total = customers.size();
+        customers = mongoTemplate.find(query, Customer.class);
+        return new PageImpl<>(customers, pageable, total);
     }
 }
