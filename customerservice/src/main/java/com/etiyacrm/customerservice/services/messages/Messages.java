@@ -9,5 +9,8 @@ public class Messages {
         public static final String INDIVIDUAL_CUSTOMER_NOT_FOUND = "individualCustomerNotFound";
         public static final String INDIVIDUAL_CUSTOMER_IS_DELETED = "individualCustomerIsDeleted";
         public static final String IDENTITY_NUMBER_NOT_EXISTS =  "identityNumberNotExists";
+        public static final String DISTRICT_NAME_EXISTS = "districtNameExists";
+        public static final String DISTRICT_NOT_FOUND = "districtNotFound";
+        public static final String DISTRICT_IS_DELETED = "districtIsDeleted";
     }
 }

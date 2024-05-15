@@ -82,7 +82,7 @@ public class CityServiceImpl implements CityService {
     }
 
     public DeletedCityResponse delete(String id) {
-        cityBusinessRules.cityIsDeleted(id);
+        cityBusinessRules.cityNotFound(id);
         cityBusinessRules.cityIsDeleted(id);
 
         City foundCity = cityRepository.findById(id).get();

@@ -11,8 +11,8 @@ public class UpdateAddressRequest {
     private String description;
     private String neighbourhood;
     private String houseNumber;
-    private String district;
     private String street;
     private String cityId;
+    private String districtId;
     private String customerId;
 }

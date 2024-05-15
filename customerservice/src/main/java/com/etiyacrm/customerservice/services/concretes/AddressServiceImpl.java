@@ -21,6 +21,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -31,33 +32,18 @@ public class AddressServiceImpl implements AddressService {
     private AddressRepository addressRepository;
 
     @Override
-    public GetListResponse<GetAllAddressResponse> getAll(PageInfo pageInfo, Optional<String> customerId) {
-        if(customerId.isEmpty()){
-            GetListResponse<GetAllAddressResponse> response = new GetListResponse<>();
-            Pageable pageable = PageRequest.of(pageInfo.getPage(), pageInfo.getSize());
-            Page<Address> addresses = addressRepository.findAllIfDeletedDateIsNull(pageable);
-            response.setItems(addresses.stream()
-                    .map(AddressMapper.INSTANCE::getAllAddressResponseFromAddress).collect(Collectors.toList()));
-            response.setTotalElements(addresses.getTotalElements());
-            response.setTotalPage(addresses.getTotalPages());
-            response.setSize(addresses.getSize());
-            response.setHasNext(addresses.hasNext());
-            response.setHasPrevious(addresses.hasPrevious());
-            return response;
-        }
-        else{
-            GetListResponse<GetAllAddressResponse> response = new GetListResponse<>();
-            Pageable pageable = PageRequest.of(0, Integer.MAX_VALUE);
-            Page<Address> addresses = addressRepository.findAllIfDeletedDateIsNullWithCustomerId(pageable,customerId.get());
-            response.setItems(addresses.stream()
-                    .map(AddressMapper.INSTANCE::getAllAddressResponseFromAddress).collect(Collectors.toList()));
-            response.setTotalElements(addresses.getTotalElements());
-            response.setTotalPage(addresses.getTotalPages());
-            response.setSize((int)addresses.getTotalElements());
-            response.setHasNext(addresses.hasNext());
-            response.setHasPrevious(addresses.hasPrevious());
-            return response;
-        }
+    public GetListResponse<GetAllAddressResponse> getAll(PageInfo pageInfo) {
+        GetListResponse<GetAllAddressResponse> response = new GetListResponse<>();
+        Pageable pageable = PageRequest.of(pageInfo.getPage(), pageInfo.getSize());
+        Page<Address> addresses = addressRepository.findAllIfDeletedDateIsNull(pageable);
+        response.setItems(addresses.stream()
+                .map(AddressMapper.INSTANCE::getAllAddressResponseFromAddress).collect(Collectors.toList()));
+        response.setTotalElements(addresses.getTotalElements());
+        response.setTotalPage(addresses.getTotalPages());
+        response.setSize(addresses.getSize());
+        response.setHasNext(addresses.hasNext());
+        response.setHasPrevious(addresses.hasPrevious());
+        return response;
     }
 
     @Override
@@ -104,5 +90,13 @@ public class AddressServiceImpl implements AddressService {
         DeletedAddressResponse deletedAddressResponse =
                 AddressMapper.INSTANCE.deletedAddressResponseFromAddress(deletedAddress);
         return deletedAddressResponse;
+    }
+
+    @Override
+    public List<GetAddressByCustomerIdResponse> getByCustomerId(String customerId) {
+        List<Address> addresses = this.addressRepository.findByCustomerId(customerId);
+        List<GetAddressByCustomerIdResponse> getAddressByCustomerIdResponse = addresses
+                .stream().map(AddressMapper.INSTANCE::getAddressByCustomerIdResponseFromAddress).collect(Collectors.toList());
+        return getAddressByCustomerIdResponse;
     }
 }
