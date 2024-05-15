@@ -33,7 +33,7 @@ public class IndividualCustomerController {
 
     @PutMapping("/{id}")
     public UpdatedIndividualCustomerResponse update(
-            @RequestBody UpdateIndividualCustomerRequest updateIndividualCustomerRequest, @PathVariable String id) {
+            @Valid @RequestBody UpdateIndividualCustomerRequest updateIndividualCustomerRequest, @PathVariable String id) {
         return individualCustomerService.update(updateIndividualCustomerRequest, id);
     }
 

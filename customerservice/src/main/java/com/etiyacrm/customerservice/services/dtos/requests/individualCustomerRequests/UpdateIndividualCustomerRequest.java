@@ -16,7 +16,7 @@ import java.time.LocalDate;
 public class UpdateIndividualCustomerRequest {
     @NotNull
     @NotBlank(message = "First name can not be empty")
-    @Size(min = 3, max = 30, message = "First name may have minimum 3 and maximum 30 characters")
+    @Size(max = 30, message = "First name may have minimum 3 and maximum 30 characters")
     private String firstName;
 
     @Size(max = 30, message = "Middle name may have maximum 30 characters")
@@ -24,7 +24,7 @@ public class UpdateIndividualCustomerRequest {
 
     @NotNull
     @NotBlank(message = "Last name can not be empty")
-    @Size(min = 3, max = 30, message = "Last name may have minimum 3 and maximum 30 characters")
+    @Size(max = 30, message = "Last name may have minimum 3 and maximum 30 characters")
     private String lastName;
 
     @NotNull
@@ -33,12 +33,12 @@ public class UpdateIndividualCustomerRequest {
 
     @NotNull
     @NotBlank(message = "Mother name can not be empty")
-    @Size(min = 3, max = 30, message = "Mother name may have minimum 3 and maximum 30 characters")
+    @Size(max = 30, message = "Mother name may have minimum 3 and maximum 30 characters")
     private String motherName;
 
     @NotNull
     @NotBlank(message = "Father name can not be empty")
-    @Size(min = 3, max = 30, message = "Father name may have minimum 3 and maximum 30 characters")
+    @Size(max = 30, message = "Father name may have minimum 3 and maximum 30 characters")
     private String fatherName;
 
     @NotNull
