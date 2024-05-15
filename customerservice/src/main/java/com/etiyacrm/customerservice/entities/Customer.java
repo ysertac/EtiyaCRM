@@ -18,6 +18,9 @@ public class Customer extends BaseEntity {
     @Column(name = "id")
     private String id;
 
+    @Column(name = "customerNumber", unique = true)
+    private long customerNumber;
+
     @OneToOne(mappedBy = "customer")
     private IndividualCustomer individualCustomer;
 

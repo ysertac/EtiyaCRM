@@ -16,6 +16,7 @@ public interface IndividualCustomerMapper {
     GetAllIndividualCustomerResponse getAllIndividualCustomerResponseFromIndividualCustomer(IndividualCustomer individualCustomer);
 
     @Mapping(source = "individualCustomer.customer.id", target = "customerId")
+    @Mapping(source = "individualCustomer.customer.customerNumber", target = "customerNumber")
     GetIndividualCustomerResponse getIndividualCustomerFromIndividualCustomer(IndividualCustomer individualCustomer);
 
     IndividualCustomer individualCustomerFromCreateIndividualCustomerRequest(CreateIndividualCustomerRequest createIndividualCustomerRequest);
@@ -23,6 +24,7 @@ public interface IndividualCustomerMapper {
     IndividualCustomer individualCustomerFromUpdateIndividualCustomerRequest(UpdateIndividualCustomerRequest updateIndividualCustomerRequest);
 
     @Mapping(source = "individualCustomer.customer.id", target = "customerId")
+    @Mapping(source = "individualCustomer.customer.customerNumber", target = "customerNumber")
     CreatedIndividualCustomerResponse createdIndividualCustomerResponseFromIndividualCustomer(IndividualCustomer individualCustomer);
 
     @Mapping(source = "individualCustomer.customer.id", target = "customerId")

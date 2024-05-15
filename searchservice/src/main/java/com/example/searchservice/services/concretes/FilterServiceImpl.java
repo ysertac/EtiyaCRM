@@ -23,11 +23,11 @@ public class FilterServiceImpl implements FilterService {
     }
 
     @Override
-    public List<PostSearchCustomerResponse> searchCustomers(Optional<String> customerId,  Optional<String> nationalityId,
+    public List<PostSearchCustomerResponse> searchCustomers(Optional<Long> customerNumber,  Optional<String> nationalityId,
                                                             Optional<String> accountNumber,  Optional<String> mobilePhone,
                                                             Optional<String> firstName,  Optional<String> lastName,  Optional<String> orderNumber) {
 
-        List<Customer> customers = this.filterRepository.getFilteredCustomers(customerId, nationalityId, accountNumber,
+        List<Customer> customers = this.filterRepository.getFilteredCustomers(customerNumber, nationalityId, accountNumber,
                 mobilePhone, firstName, lastName, orderNumber);
         return convertCustomerToResponse(customers);
     }
@@ -37,6 +37,7 @@ public class FilterServiceImpl implements FilterService {
         for (Customer customer : customers) {
             PostSearchCustomerResponse postSearchCustomerResponse = new PostSearchCustomerResponse();
             postSearchCustomerResponse.setCustomerId(customer.getCustomerId());
+            postSearchCustomerResponse.setCustomerNumber(customer.getCustomerNumber());
             postSearchCustomerResponse.setNationalityId(customer.getNationalityId());
             postSearchCustomerResponse.setRole("customer");
             postSearchCustomerResponse.setFirstName(customer.getFirstName());

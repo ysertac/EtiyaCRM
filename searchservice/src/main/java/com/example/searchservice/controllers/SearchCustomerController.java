@@ -19,7 +19,7 @@ public class SearchCustomerController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<PostSearchCustomerResponse> searchCustomer(
-            Optional<String> customerId,
+            Optional<Long> customerNumber,
             Optional<String> nationalityId,
             Optional<String> accountNumber,
             Optional<String> mobilePhone,
@@ -27,6 +27,6 @@ public class SearchCustomerController {
             Optional<String> lastName,
             Optional<String> orderNumber
     ) {
-        return filterService.searchCustomers(customerId, nationalityId, accountNumber, mobilePhone, firstName, lastName, orderNumber);
+        return filterService.searchCustomers(customerNumber, nationalityId, accountNumber, mobilePhone, firstName, lastName, orderNumber);
     }
 }

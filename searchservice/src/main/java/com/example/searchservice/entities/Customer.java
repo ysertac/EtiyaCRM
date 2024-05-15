@@ -18,6 +18,9 @@ public class Customer {
     @Field(name = "customerId")
     private String customerId;
 
+    @Field(name= "customerNumber")
+    private long customerNumber;
+
     @Field(name = "firstName")
     private String firstName;
 

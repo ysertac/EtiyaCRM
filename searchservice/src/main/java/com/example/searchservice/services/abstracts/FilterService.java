@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface FilterService {
     void add(Customer customer);
 
-    List<PostSearchCustomerResponse> searchCustomers(Optional<String> customerId, Optional<String> nationalityId,
+    List<PostSearchCustomerResponse> searchCustomers(Optional<Long> customerNumber, Optional<String> nationalityId,
                                                      Optional<String> accountNumber, Optional<String> mobilePhone,
                                                      Optional<String> firstName, Optional<String> lastName, Optional<String> orderNumber);
 }

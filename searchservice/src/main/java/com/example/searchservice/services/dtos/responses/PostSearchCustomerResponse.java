@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 public class PostSearchCustomerResponse {
     String customerId;
+    long customerNumber;
     String nationalityId;
     String firstName;
     String middleName;

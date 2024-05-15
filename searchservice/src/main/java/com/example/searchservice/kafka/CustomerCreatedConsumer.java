@@ -19,6 +19,7 @@ public class CustomerCreatedConsumer {
     private void consume(CustomerCreatedEvent customerCreatedEvent) {
         Customer customer = new Customer();
         customer.setCustomerId(customerCreatedEvent.getCustomerId());
+        customer.setCustomerNumber(customerCreatedEvent.getCustomerNumber());
         customer.setFirstName(customerCreatedEvent.getFirstName());
         customer.setMiddleName(customerCreatedEvent.getMiddleName());
         customer.setLastName(customerCreatedEvent.getLastname());

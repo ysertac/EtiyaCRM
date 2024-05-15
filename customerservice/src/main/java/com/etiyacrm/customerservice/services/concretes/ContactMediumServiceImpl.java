@@ -40,6 +40,7 @@ public class ContactMediumServiceImpl implements ContactMediumService {
 
         CustomerCreatedEvent customerCreatedEvent = new CustomerCreatedEvent();
         customerCreatedEvent.setCustomerId(createContactMediumRequest.getCustomerId());
+        customerCreatedEvent.setCustomerNumber(individualCustomer.getCustomerNumber());
         customerCreatedEvent.setFirstName(individualCustomer.getFirstName());
         customerCreatedEvent.setMiddleName(individualCustomer.getMiddleName());
         customerCreatedEvent.setLastname(individualCustomer.getLastName());

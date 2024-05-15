@@ -1,11 +1,8 @@
 package com.etiyacrm.customerservice.services.concretes;
 
 
-import com.etiya.common.events.CustomerCreatedEvent;
-import com.etiyacrm.customerservice.entities.ContactMedium;
 import com.etiyacrm.customerservice.entities.Customer;
 import com.etiyacrm.customerservice.entities.IndividualCustomer;
-import com.etiyacrm.customerservice.kafka.producers.CustomerCreatedProducer;
 import com.etiyacrm.customerservice.repositories.IndividualCustomerRepository;
 import com.etiyacrm.customerservice.services.abstracts.IndividualCustomerService;
 import com.etiyacrm.customerservice.services.dtos.requests.individualCustomerRequests.CreateIndividualCustomerRequest;
@@ -41,6 +38,7 @@ public class IndividualCustomerImpl implements IndividualCustomerService {
         final String customerId = UUID.randomUUID().toString();
         Customer customer = new Customer();
         customer.setId(customerId);
+        customer.setCustomerNumber((int)(Math.random() * 1000000));
         customer.setCreatedDate(LocalDateTime.now());
 
         IndividualCustomer individualCustomer =

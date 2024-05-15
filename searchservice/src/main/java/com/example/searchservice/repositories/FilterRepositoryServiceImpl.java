@@ -15,11 +15,11 @@ public class FilterRepositoryServiceImpl implements FilterRepositoryService {
     private MongoTemplate mongoTemplate;
 
     @Override
-    public List<Customer> getFilteredCustomers(Optional<String> customerId, Optional<String> nationalityId,
+    public List<Customer> getFilteredCustomers(Optional<Long> customerNumber, Optional<String> nationalityId,
                                                Optional<String> accountNumber, Optional<String> mobilePhone, Optional<String> firstName,
                                                Optional<String> lastName, Optional<String> orderNumber) {
         Query query = new Query();
-        customerId.ifPresent(s -> query.addCriteria(Criteria.where("customerId").is(s)));
+        customerNumber.ifPresent(s -> query.addCriteria(Criteria.where("customerNumber").is(s)));
         nationalityId.ifPresent(s -> query.addCriteria(Criteria.where("nationalityId").is(s)));
         accountNumber.ifPresent(s -> query.addCriteria(Criteria.where("accountNumber").is(s)));
         mobilePhone.ifPresent(s -> query.addCriteria(Criteria.where("mobilePhone").is(s)));
