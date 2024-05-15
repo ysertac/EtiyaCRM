@@ -22,6 +22,8 @@ public interface ContactMediumMapper {
     @Mapping(source = "contactMedium.customer.id", target = "customerId")
     CreatedContactMediumResponse createdContactMediumResponseFromContactMedium(ContactMedium contactMedium);
     @Mapping(source = "contactMedium.customer.id", target = "customerId")
+    GetContactMediumByCustomerIdResponse getContactMediumByCustomerIdResponseFromContactMedium(ContactMedium contactMedium);
+    @Mapping(source = "contactMedium.customer.id", target = "customerId")
     GetContactMediumResponse getContactMediumResponseFromContactMedium(ContactMedium contactMedium);
     @Mapping(source = "updateContactMediumRequest.customerId", target = "customer.id")
     ContactMedium contactMediumFromUpdateContactMediumRequest(UpdateContactMediumRequest updateContactMediumRequest);

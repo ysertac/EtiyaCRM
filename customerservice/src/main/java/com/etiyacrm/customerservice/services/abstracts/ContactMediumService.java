@@ -15,6 +15,8 @@ public interface ContactMediumService {
 
     GetContactMediumResponse findById(String id);
 
+    GetContactMediumByCustomerIdResponse getByCustomerId(String customerId);
+
     UpdatedContactMediumResponse update(UpdateContactMediumRequest updateContactMediumRequest, String id);
 
     DeletedContactMediumResponse delete(String id);
