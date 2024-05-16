@@ -17,4 +17,5 @@ public interface DistrictService {
     CreatedDistrictResponse add(CreateDistrictRequest createDistrictRequest);
     UpdatedDistrictResponse update(UpdateDistrictRequest updateDistrictRequest, String id);
     DeletedDistrictResponse delete(String id);
+    List<GetDistrictByCityIdResponse> getByCityId(String cityId);
 }

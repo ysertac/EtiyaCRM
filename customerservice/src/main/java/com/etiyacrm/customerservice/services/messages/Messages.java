@@ -12,7 +12,13 @@ public class Messages {
         public static final String DISTRICT_NAME_EXISTS = "districtNameExists";
         public static final String DISTRICT_NOT_FOUND = "districtNotFound";
         public static final String DISTRICT_IS_DELETED = "districtIsDeleted";
+
         public static final String BILLING_ACCOUNT_NOT_FOUND = "billingAccountNotFound";
         public static final String BILLING_ACCOUNT_IS_DELETED = "billingAccountIsDeleted";
+
+        public static final String COUNTRY_NAME_EXISTS = "countryNameExists";
+        public static final String COUNTRY_NOT_FOUND = "countryNotFound";
+        public static final String COUNTRY_IS_DELETED = "countryIsDeleted";
+
     }
 }
