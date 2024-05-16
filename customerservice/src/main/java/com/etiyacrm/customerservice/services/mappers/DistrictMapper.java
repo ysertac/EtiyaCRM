@@ -13,7 +13,7 @@ import org.mapstruct.factory.Mappers;
 public interface DistrictMapper {
     DistrictMapper INSTANCE = Mappers.getMapper(DistrictMapper.class);
     @Mapping(source = "district.city.id", target = "cityId")
-    GetAllDistrictResponse getAllDistrictResponseDistrict(District district);
+    GetAllDistrictResponse getAllDistrictResponseFromDistrict(District district);
     @Mapping(source = "district.city.id", target = "cityId")
     GetDistrictResponse getDistrictResponseFromDistrict(District district);
     @Mapping(source = "createDistrictRequest.cityId", target = "city.id")
