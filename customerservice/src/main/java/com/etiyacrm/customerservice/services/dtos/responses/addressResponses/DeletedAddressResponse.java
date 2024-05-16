@@ -16,6 +16,7 @@ public class DeletedAddressResponse {
     private String houseNumber;
     private String districtId;
     private String street;
+    private String countryId;
     private String cityId;
     private String customerId;
 }

@@ -1,4 +1,4 @@
-package com.etiyacrm.customerservice.services.dtos.requests.cityRequests;
+package com.etiyacrm.customerservice.services.dtos.requests.countryRequests;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -11,15 +11,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateCityRequest {
+public class CreateCountryRequest {
     @NotNull
     @NotEmpty
     @NotBlank
     @Size(min = 3, max = 20)
     private String name;
-
-    @NotNull
-    @NotEmpty
-    @NotBlank
-    private String countryId;
 }

@@ -1,7 +1,5 @@
 package com.etiyacrm.customerservice.services.dtos.responses.addressResponses;
 
-import com.etiyacrm.customerservice.entities.City;
-import com.etiyacrm.customerservice.entities.Customer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +13,7 @@ public class CreatedAddressResponse {
     private String neighbourhood;
     private String houseNumber;
     private String street;
+    private String countryId;
     private String cityId;
     private String districtId;
     private String customerId;

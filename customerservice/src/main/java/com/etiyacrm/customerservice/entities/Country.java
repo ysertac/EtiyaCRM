@@ -1,6 +1,5 @@
 package com.etiyacrm.customerservice.entities;
 
-import com.etiyacrm.customerservice.core.entities.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,11 +8,11 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Entity
-@Table(name = "cities")
+@Table(name = "countries")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class City extends BaseEntity {
+public class Country {
     @Id
     @Column(name = "id")
     private String id;
@@ -21,13 +20,9 @@ public class City extends BaseEntity {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "country_id")
-    private Country country;
+    @OneToMany(mappedBy = "country")
+    private List<City> cities;
 
-    @OneToMany(mappedBy = "city")
-    private List<District> districts;
-
-    @OneToMany(mappedBy = "city")
-    private List<Address> adresses;
+    @OneToMany(mappedBy = "country")
+    private List<Address> addresses;
 }

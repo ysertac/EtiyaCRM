@@ -28,14 +28,10 @@ public class CreateIndividualCustomerRequest {
     @NotBlank(message = "Gender can not be empty")
     private String gender;
 
-    @NotNull
-    @NotBlank(message = "Mother name can not be empty")
-    @Size(max = 30, message = "Mother name may have minimum 3 and maximum 30 characters")
+    @Size(max = 30, message = "Mother name may have maximum 30 characters")
     private String motherName;
 
-    @NotNull
-    @NotBlank(message = "Father name can not be empty")
-    @Size(max = 30, message = "Father name may have minimum 3 and maximum 30 characters")
+    @Size(max = 30, message = "Father name may have maximum 30 characters")
     private String fatherName;
 
     @NotNull

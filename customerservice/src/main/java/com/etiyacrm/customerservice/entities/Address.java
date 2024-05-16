@@ -33,6 +33,10 @@ public class Address extends BaseEntity {
     private Customer customer;
 
     @ManyToOne
+    @JoinColumn(name = "country_id")
+    private Country country;
+
+    @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;
 

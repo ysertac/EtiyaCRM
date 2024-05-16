@@ -21,11 +21,11 @@ public class District extends BaseEntity {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "district")
-    private List<Address> adresses;
-
     @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;
+
+    @OneToMany(mappedBy = "district")
+    private List<Address> adresses;
 
 }
