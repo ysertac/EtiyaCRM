@@ -1,9 +1,11 @@
 package com.etiyacrm.customerservice.services.mappers;
 
+import com.etiyacrm.customerservice.entities.Address;
 import com.etiyacrm.customerservice.entities.City;
 import com.etiyacrm.customerservice.services.dtos.requests.cityRequests.CreateCityRequest;
 import com.etiyacrm.customerservice.services.dtos.requests.cityRequests.UpdateCityRequest;
 import com.etiyacrm.customerservice.services.dtos.responses.CityResponses.*;
+import com.etiyacrm.customerservice.services.dtos.responses.addressResponses.GetAddressByCustomerIdResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -25,4 +27,6 @@ public interface CityMapper {
     UpdatedCityResponse updatedCityResponseFromCity(City city);
     @Mapping(source = "city.country.id", target = "countryId")
     DeletedCityResponse deletedCityResponseFromCity(City city);
+    @Mapping(source = "city.country.id", target = "countryId")
+    GetCityByCountryIdResponse getCityByCountryIdResponseFromCity(City city);
 }

@@ -1,12 +1,15 @@
 package com.etiyacrm.customerservice.services.concretes;
 
+import com.etiyacrm.customerservice.entities.City;
 import com.etiyacrm.customerservice.entities.District;
 import com.etiyacrm.customerservice.repositories.DistrictRepository;
 import com.etiyacrm.customerservice.services.abstracts.DistrictService;
 import com.etiyacrm.customerservice.services.dtos.requests.districtRequests.CreateDistrictRequest;
 import com.etiyacrm.customerservice.services.dtos.requests.districtRequests.UpdateDistrictRequest;
 
+import com.etiyacrm.customerservice.services.dtos.responses.CityResponses.GetCityByCountryIdResponse;
 import com.etiyacrm.customerservice.services.dtos.responses.districtResponses.*;
+import com.etiyacrm.customerservice.services.mappers.CityMapper;
 import com.etiyacrm.customerservice.services.mappers.DistrictMapper;
 import com.etiyacrm.customerservice.services.rules.DistrictBusinessRules;
 import lombok.AllArgsConstructor;
@@ -80,5 +83,13 @@ public class DistrictServiceImpl implements DistrictService {
 
         DeletedDistrictResponse deletedDistrictResponse = DistrictMapper.INSTANCE.deletedDistrictResponseFromDistrict(deletedDistrict);
         return deletedDistrictResponse;
+    }
+
+    @Override
+    public List<GetDistrictByCityIdResponse> getByCityId(String cityId) {
+        List<District> districts = this.districtRepository.findByCityId(cityId);
+        List<GetDistrictByCityIdResponse> getDistrictByCityIdResponse = districts
+                .stream().map(DistrictMapper.INSTANCE::getDistrictByCityIdResponseFromDistrict).collect(Collectors.toList());
+        return getDistrictByCityIdResponse;
     }
 }

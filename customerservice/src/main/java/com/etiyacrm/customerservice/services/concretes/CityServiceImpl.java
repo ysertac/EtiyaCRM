@@ -2,10 +2,13 @@ package com.etiyacrm.customerservice.services.concretes;
 
 import com.etiyacrm.customerservice.core.business.paging.PageInfo;
 import com.etiyacrm.customerservice.core.responses.GetListResponse;
+import com.etiyacrm.customerservice.entities.Address;
 import com.etiyacrm.customerservice.entities.City;
 import com.etiyacrm.customerservice.repositories.CityRepository;
 import com.etiyacrm.customerservice.services.dtos.requests.cityRequests.UpdateCityRequest;
 import com.etiyacrm.customerservice.services.dtos.responses.CityResponses.*;
+import com.etiyacrm.customerservice.services.dtos.responses.addressResponses.GetAddressByCustomerIdResponse;
+import com.etiyacrm.customerservice.services.mappers.AddressMapper;
 import com.etiyacrm.customerservice.services.mappers.CityMapper;
 import com.etiyacrm.customerservice.services.abstracts.CityService;
 import com.etiyacrm.customerservice.services.dtos.requests.cityRequests.CreateCityRequest;
@@ -17,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -91,5 +95,13 @@ public class CityServiceImpl implements CityService {
 
         DeletedCityResponse deletedCityResponse = CityMapper.INSTANCE.deletedCityResponseFromCity(deletedCity);
         return deletedCityResponse;
+    }
+
+    @Override
+    public List<GetCityByCountryIdResponse> getByCountryId(String countryId) {
+        List<City> cities = this.cityRepository.findByCountryId(countryId);
+        List<GetCityByCountryIdResponse> getCityByCountryIdResponse = cities
+                .stream().map(CityMapper.INSTANCE::getCityByCountryIdResponseFromCity).collect(Collectors.toList());
+        return getCityByCountryIdResponse;
     }
 }

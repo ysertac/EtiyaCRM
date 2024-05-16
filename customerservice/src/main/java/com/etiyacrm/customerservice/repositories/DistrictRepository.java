@@ -14,4 +14,5 @@ public interface DistrictRepository extends JpaRepository<District, String> {
     Optional<District> findByNameIgnoreCase(String name);
     @Query(value = "SELECT * FROM districts WHERE deleted_date IS null", nativeQuery = true)
     List<District> findAllIfDeletedDateIsNull();
+    List<District> findByCityId(String cityId);
 }

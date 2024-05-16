@@ -9,6 +9,9 @@ import com.etiyacrm.customerservice.services.dtos.responses.CityResponses.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @CrossOrigin("*")
 @RestController
 @RequestMapping("customerservice/api/v1/cities")
@@ -39,5 +42,10 @@ public class CitiesController {
     @DeleteMapping("/{id}")
     public DeletedCityResponse delete(@PathVariable String id) {
         return cityService.delete(id);
+    }
+
+    @GetMapping("/countryid/{countryId}")
+    public List<GetCityByCountryIdResponse> getByCountryId(@PathVariable String countryId){
+        return cityService.getByCountryId(countryId);
     }
 }
