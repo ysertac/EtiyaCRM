@@ -1,5 +1,6 @@
 package com.etiyacrm.customerservice.entities;
 
+import com.etiyacrm.customerservice.core.entities.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Country {
+public class Country extends BaseEntity {
     @Id
     @Column(name = "id")
     private String id;

@@ -27,7 +27,7 @@ public class DistrictServiceImpl implements DistrictService {
     public List<GetAllDistrictResponse> getAll() {
         List<District> districts = districtRepository.findAllIfDeletedDateIsNull();
         List<GetAllDistrictResponse> getAllDistrictResponse = districts.stream()
-                .map(DistrictMapper.INSTANCE::getAllDistrictResponseDistrict).collect(Collectors.toList());
+                .map(DistrictMapper.INSTANCE::getAllDistrictResponseFromDistrict).collect(Collectors.toList());
         return getAllDistrictResponse;
     }
 

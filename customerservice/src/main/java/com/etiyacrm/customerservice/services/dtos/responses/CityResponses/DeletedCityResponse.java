@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class DeletedCityResponse {
     private String id;
     private String name;
+    private String countryId;
 }
