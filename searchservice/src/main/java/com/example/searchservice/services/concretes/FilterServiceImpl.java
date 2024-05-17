@@ -27,6 +27,12 @@ public class FilterServiceImpl implements FilterService {
     }
 
     @Override
+    public void update(Customer customer) {
+        Customer result = this.filterRepository.findCustomerByCustomerId(customer.getCustomerId());
+        filterRepository.save(customer);
+    }
+
+    @Override
     public GetListResponse<GetAllSearchCustomerResponse> searchCustomers(Optional<Long> customerNumber, Optional<String> nationalityId, Optional<String> accountNumber,
                                                               Optional<String> mobilePhone, Optional<String> firstName, Optional<String> lastName,
                                                               Optional<String> orderNumber, PageInfo pageInfo) {

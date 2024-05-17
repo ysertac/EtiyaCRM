@@ -1,9 +1,11 @@
 package com.etiyacrm.customerservice.services.concretes;
 
 
+import com.etiya.common.events.CustomerUpdatedEvent;
 import com.etiyacrm.customerservice.adapters.CustomerCheckService;
 import com.etiyacrm.customerservice.entities.Customer;
 import com.etiyacrm.customerservice.entities.IndividualCustomer;
+import com.etiyacrm.customerservice.kafka.producers.CustomerUpdatedProducer;
 import com.etiyacrm.customerservice.repositories.IndividualCustomerRepository;
 import com.etiyacrm.customerservice.services.abstracts.IndividualCustomerService;
 import com.etiyacrm.customerservice.services.dtos.requests.individualCustomerRequests.CheckTurkishCitizenRequest;
@@ -27,6 +29,7 @@ public class IndividualCustomerImpl implements IndividualCustomerService {
     private IndividualCustomerRepository individualCustomerRepository;
     private IndividualCustomerBusinessRules individualCustomerBusinessRules;
     private CustomerCheckService customerCheckService;
+    private CustomerUpdatedProducer customerUpdatedProducer;
 
     @Override
     public CreatedIndividualCustomerResponse add(CreateIndividualCustomerRequest createIndividualCustomerRequest) throws Exception {
@@ -98,6 +101,14 @@ public class IndividualCustomerImpl implements IndividualCustomerService {
         individualCustomer.setCustomer(foundIndividualCustomer.getCustomer());
         individualCustomer.getCustomer().setUpdatedDate(LocalDateTime.now());
         IndividualCustomer updatedIndividualCustomer = individualCustomerRepository.save(individualCustomer);
+
+        CustomerUpdatedEvent customerUpdatedEvent = new CustomerUpdatedEvent();
+        customerUpdatedEvent.setCustomerId(updatedIndividualCustomer.getId());
+        customerUpdatedEvent.setFirstName(updatedIndividualCustomer.getFirstName());
+        customerUpdatedEvent.setMiddleName(updatedIndividualCustomer.getMiddleName());
+        customerUpdatedEvent.setLastname(updatedIndividualCustomer.getLastName());
+        customerUpdatedEvent.setNationalityId(updatedIndividualCustomer.getNationalityId());
+        customerUpdatedProducer.sendMessage(customerUpdatedEvent);
 
         return IndividualCustomerMapper.INSTANCE.updatedIndividualCustomerResponseFromIndividualCustomer(updatedIndividualCustomer);
     }

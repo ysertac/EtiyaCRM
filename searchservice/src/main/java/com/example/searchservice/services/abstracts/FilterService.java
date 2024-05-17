@@ -11,6 +11,8 @@ import java.util.Optional;
 public interface FilterService {
     void add(Customer customer);
 
+    void update(Customer customer);
+
     GetListResponse<GetAllSearchCustomerResponse> searchCustomers(Optional<Long> customerNumber, Optional<String> nationalityId, Optional<String> accountNumber,
                                                                   Optional<String> mobilePhone, Optional<String> firstName, Optional<String> lastName,
                                                                   Optional<String> orderNumber, PageInfo pageInfo);
