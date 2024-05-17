@@ -6,6 +6,7 @@ import com.etiyacrm.customerservice.services.abstracts.AddressService;
 import com.etiyacrm.customerservice.services.dtos.requests.addressRequests.CreateAddressRequest;
 import com.etiyacrm.customerservice.services.dtos.requests.addressRequests.UpdateAddressRequest;
 import com.etiyacrm.customerservice.services.dtos.responses.addressResponses.*;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.Path;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class AddressesController {
     private AddressService addressService;
 
     @PostMapping
-    public CreatedAddressResponse add(@RequestBody CreateAddressRequest createAddressRequest){
+    public CreatedAddressResponse add(@Valid @RequestBody CreateAddressRequest createAddressRequest){
         return addressService.add(createAddressRequest);
     }
 
@@ -36,7 +37,7 @@ public class AddressesController {
     }
 
     @PutMapping("/{id}")
-    public UpdatedAddressResponse update(@RequestBody UpdateAddressRequest updateAddressRequest, @PathVariable String id){
+    public UpdatedAddressResponse update(@Valid @RequestBody UpdateAddressRequest updateAddressRequest, @PathVariable String id){
         return addressService.update(updateAddressRequest, id);
     }
 

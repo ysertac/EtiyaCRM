@@ -1,19 +1,15 @@
 package com.etiyacrm.customerservice.services.concretes;
 
-import com.etiya.common.events.CustomerCreatedEvent;
 import com.etiyacrm.customerservice.core.business.paging.PageInfo;
 import com.etiyacrm.customerservice.core.responses.GetListResponse;
 import com.etiyacrm.customerservice.entities.Address;
-import com.etiyacrm.customerservice.entities.City;
 import com.etiyacrm.customerservice.repositories.AddressRepository;
 import com.etiyacrm.customerservice.services.abstracts.AddressService;
 import com.etiyacrm.customerservice.services.dtos.requests.addressRequests.CreateAddressRequest;
 import com.etiyacrm.customerservice.services.dtos.requests.addressRequests.UpdateAddressRequest;
-import com.etiyacrm.customerservice.services.dtos.responses.CityResponses.DeletedCityResponse;
-import com.etiyacrm.customerservice.services.dtos.responses.CityResponses.UpdatedCityResponse;
 import com.etiyacrm.customerservice.services.dtos.responses.addressResponses.*;
 import com.etiyacrm.customerservice.services.mappers.AddressMapper;
-import com.etiyacrm.customerservice.services.mappers.CityMapper;
+import com.etiyacrm.customerservice.services.rules.AddressBusinessRules;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,7 +18,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -30,6 +25,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class AddressServiceImpl implements AddressService {
     private AddressRepository addressRepository;
+    private AddressBusinessRules addressBusinessRules;
 
     @Override
     public GetListResponse<GetAllAddressResponse> getAll(PageInfo pageInfo) {
@@ -48,6 +44,9 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public GetAddressResponse getById(String id) {
+        addressBusinessRules.addressNotFound(id);
+        addressBusinessRules.addressIsDeleted(id);
+
         Address foundAddress = addressRepository.findById(id).get();
         GetAddressResponse getAddressResponse = AddressMapper.INSTANCE.getAddressResponseFromAddress(foundAddress);
         return getAddressResponse;
@@ -67,6 +66,9 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public UpdatedAddressResponse update(UpdateAddressRequest updateAddressRequest, String id) {
+        addressBusinessRules.addressNotFound(id);
+        addressBusinessRules.addressIsDeleted(id);
+
         Address foundAddress = addressRepository.findById(id).get();
 
         Address address =
@@ -83,6 +85,9 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public DeletedAddressResponse delete(String id) {
+        addressBusinessRules.addressNotFound(id);
+        addressBusinessRules.addressIsDeleted(id);
+
         Address foundAddress = addressRepository.findById(id).get();
         foundAddress.setDeletedDate(LocalDateTime.now());
         Address deletedAddress = addressRepository.save(foundAddress);

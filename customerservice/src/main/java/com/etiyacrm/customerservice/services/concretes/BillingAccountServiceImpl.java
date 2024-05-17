@@ -6,7 +6,6 @@ import com.etiyacrm.customerservice.services.abstracts.BillingAccountService;
 import com.etiyacrm.customerservice.services.dtos.requests.billingAccountRequests.CreateBillingAccountRequest;
 import com.etiyacrm.customerservice.services.dtos.requests.billingAccountRequests.UpdateBillingAccountRequest;
 import com.etiyacrm.customerservice.services.dtos.responses.billingAccountResponses.*;
-import com.etiyacrm.customerservice.services.dtos.responses.contactMediumResponses.GetAllContactMediumResponse;
 import com.etiyacrm.customerservice.services.mappers.BillingAccountMapper;
 import com.etiyacrm.customerservice.services.rules.BillingAccountBusinessRules;
 import lombok.AllArgsConstructor;
@@ -34,11 +33,13 @@ public class BillingAccountServiceImpl implements BillingAccountService {
 
     @Override
     public List<GetBillingAccountResponse> getByCustomerId(String id) {
+        billingAccountBusinessRules.billingAccountIsDeleted(id);
+
         List<BillingAccount> billingAccounts = billingAccountRepository.findByCustomerId(id);
-        List<GetBillingAccountResponse> getBillingAccountList = billingAccounts.stream()
-                .filter(billingAccount -> billingAccount.getDeletedDate() == null)
-                .map(BillingAccountMapper.INSTANCE::getBillingAccountResponseFromBillingAccount)
-                .collect(Collectors.toList());
+        List<GetBillingAccountResponse> getBillingAccountList =
+                billingAccounts.stream()
+                        .map(BillingAccountMapper.INSTANCE::getBillingAccountResponseFromBillingAccount)
+                        .collect(Collectors.toList());
         return getBillingAccountList;
     }
 
