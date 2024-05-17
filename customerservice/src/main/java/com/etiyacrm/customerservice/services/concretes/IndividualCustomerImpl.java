@@ -1,10 +1,12 @@
 package com.etiyacrm.customerservice.services.concretes;
 
 
+import com.etiyacrm.customerservice.adapters.CustomerCheckService;
 import com.etiyacrm.customerservice.entities.Customer;
 import com.etiyacrm.customerservice.entities.IndividualCustomer;
 import com.etiyacrm.customerservice.repositories.IndividualCustomerRepository;
 import com.etiyacrm.customerservice.services.abstracts.IndividualCustomerService;
+import com.etiyacrm.customerservice.services.dtos.requests.individualCustomerRequests.CheckTurkishCitizenRequest;
 import com.etiyacrm.customerservice.services.dtos.requests.individualCustomerRequests.CreateIndividualCustomerRequest;
 import com.etiyacrm.customerservice.services.dtos.requests.individualCustomerRequests.UpdateIndividualCustomerRequest;
 import com.etiyacrm.customerservice.services.dtos.responses.IndividualCustomerResponses.*;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -23,6 +26,7 @@ import java.util.stream.Collectors;
 public class IndividualCustomerImpl implements IndividualCustomerService {
     private IndividualCustomerRepository individualCustomerRepository;
     private IndividualCustomerBusinessRules individualCustomerBusinessRules;
+    private CustomerCheckService customerCheckService;
 
     @Override
     public CreatedIndividualCustomerResponse add(CreateIndividualCustomerRequest createIndividualCustomerRequest) throws Exception {
@@ -38,7 +42,7 @@ public class IndividualCustomerImpl implements IndividualCustomerService {
         final String customerId = UUID.randomUUID().toString();
         Customer customer = new Customer();
         customer.setId(customerId);
-        customer.setCustomerNumber((int)(Math.random() * 1000000));
+        customer.setCustomerNumber((int) (Math.random() * 1000000));
         customer.setCreatedDate(LocalDateTime.now());
 
         IndividualCustomer individualCustomer =
@@ -61,6 +65,15 @@ public class IndividualCustomerImpl implements IndividualCustomerService {
                         IndividualCustomerMapper.INSTANCE
                                 .getAllIndividualCustomerResponseFromIndividualCustomer(individualCustomer)).collect(Collectors.toList());
         return getAllIndividualCustomerResponses;
+    }
+
+    @Override
+    public boolean isIndividualCustomerExistsByNationalityId(String nationalityId) {
+        Optional<IndividualCustomer> individualCustomer = individualCustomerRepository.findByNationalityId(nationalityId);
+        if (individualCustomer.isPresent()) {
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -101,5 +114,11 @@ public class IndividualCustomerImpl implements IndividualCustomerService {
         IndividualCustomer deletedIndividualCustomer = individualCustomerRepository.save(foundIndividualCustomer);
 
         return IndividualCustomerMapper.INSTANCE.deleteIndividualCustomerResponseFromIndividualCustomer(deletedIndividualCustomer);
+    }
+
+    @Override
+    public boolean checkIfTurkishCitizen(CheckTurkishCitizenRequest checkTurkishCitizenRequest) throws Exception {
+        return customerCheckService.checkIfRealPerson(checkTurkishCitizenRequest.getNationalityId(), checkTurkishCitizenRequest.getFirstName(),
+                checkTurkishCitizenRequest.getLastName(), checkTurkishCitizenRequest.getBirthDate().getYear());
     }
 }

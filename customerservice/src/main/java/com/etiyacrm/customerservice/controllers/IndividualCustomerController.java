@@ -1,6 +1,7 @@
 package com.etiyacrm.customerservice.controllers;
 
 import com.etiyacrm.customerservice.services.abstracts.IndividualCustomerService;
+import com.etiyacrm.customerservice.services.dtos.requests.individualCustomerRequests.CheckTurkishCitizenRequest;
 import com.etiyacrm.customerservice.services.dtos.requests.individualCustomerRequests.CreateIndividualCustomerRequest;
 import com.etiyacrm.customerservice.services.dtos.requests.individualCustomerRequests.UpdateIndividualCustomerRequest;
 import com.etiyacrm.customerservice.services.dtos.responses.IndividualCustomerResponses.*;
@@ -21,9 +22,19 @@ public class IndividualCustomerController {
         return individualCustomerService.add(createIndividualCustomerRequest);
     }
 
+    @PostMapping("/checkmernis")
+    public boolean checkIfRealPerson(@RequestBody CheckTurkishCitizenRequest checkTurkishCitizenRequest) throws Exception {
+        return individualCustomerService.checkIfTurkishCitizen(checkTurkishCitizenRequest);
+    }
+
     @GetMapping
     public List<GetAllIndividualCustomerResponse> findAll() {
         return individualCustomerService.findAll();
+    }
+
+    @GetMapping("/nationalityid")
+    public boolean isIndividualCustomerExistsByNationalityId(String nationalityId) {
+        return individualCustomerService.isIndividualCustomerExistsByNationalityId(nationalityId);
     }
 
     @GetMapping("/{id}")
