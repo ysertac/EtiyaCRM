@@ -38,5 +38,6 @@ public class CreateIndividualCustomerRequest {
     @Pattern(regexp = "^[1-9]{1}[0-9]{9}[02468]{1}$", message = "Invalid National ID number ")
     private String nationalityId;
 
+    @NotNull
     private LocalDate birthDate;
 }

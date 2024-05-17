@@ -12,6 +12,7 @@ import java.time.LocalDate;
 public class DeletedIndividualCustomerResponse {
     private String id;
     private String customerId;
+    private long customerNumber;
     private String firstName;
     private String middleName;
     private String lastName;

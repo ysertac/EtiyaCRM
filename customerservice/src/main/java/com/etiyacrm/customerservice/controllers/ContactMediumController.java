@@ -40,7 +40,7 @@ public class ContactMediumController {
     }
 
     @PutMapping("/{id}")
-    public UpdatedContactMediumResponse update(
+    public UpdatedContactMediumResponse update(@Valid
             @RequestBody UpdateContactMediumRequest updateContactMediumRequest, @PathVariable String id) {
         return contactMediumService.update(updateContactMediumRequest, id);
     }

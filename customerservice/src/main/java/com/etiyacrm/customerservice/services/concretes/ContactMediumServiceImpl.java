@@ -3,7 +3,6 @@ package com.etiyacrm.customerservice.services.concretes;
 import com.etiya.common.events.CustomerCreatedEvent;
 import com.etiyacrm.customerservice.entities.ContactMedium;
 import com.etiyacrm.customerservice.entities.Customer;
-import com.etiyacrm.customerservice.entities.IndividualCustomer;
 import com.etiyacrm.customerservice.kafka.producers.CustomerCreatedProducer;
 import com.etiyacrm.customerservice.repositories.ContactMediumRepository;
 import com.etiyacrm.customerservice.services.abstracts.ContactMediumService;
@@ -13,6 +12,7 @@ import com.etiyacrm.customerservice.services.dtos.requests.contactMediumRequests
 import com.etiyacrm.customerservice.services.dtos.responses.IndividualCustomerResponses.GetIndividualCustomerResponse;
 import com.etiyacrm.customerservice.services.dtos.responses.contactMediumResponses.*;
 import com.etiyacrm.customerservice.services.mappers.ContactMediumMapper;
+import com.etiyacrm.customerservice.services.rules.ContactMediumBusinessRules;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +27,7 @@ public class ContactMediumServiceImpl implements ContactMediumService {
     private ContactMediumRepository contactMediumRepository;
     private IndividualCustomerService individualCustomerService;
     private CustomerCreatedProducer customerCreatedProducer;
+    private ContactMediumBusinessRules contactMediumBusinessRules;
 
     @Override
     public CreatedContactMediumResponse add(CreateContactMediumRequest createContactMediumRequest) {
@@ -64,6 +65,9 @@ public class ContactMediumServiceImpl implements ContactMediumService {
 
     @Override
     public GetContactMediumResponse findById(String id) {
+        contactMediumBusinessRules.contactMediumNotFound(id);
+        contactMediumBusinessRules.contactMediumIsDeleted(id);
+
         ContactMedium contactMedium = this.contactMediumRepository.findById(id).get();
         return ContactMediumMapper.INSTANCE.getContactMediumResponseFromContactMedium(contactMedium);
     }
@@ -76,6 +80,9 @@ public class ContactMediumServiceImpl implements ContactMediumService {
 
     @Override
     public UpdatedContactMediumResponse update(UpdateContactMediumRequest updateContactMediumRequest, String id) {
+        contactMediumBusinessRules.contactMediumNotFound(id);
+        contactMediumBusinessRules.contactMediumIsDeleted(id);
+
         ContactMedium contactMediumFromDb = this.contactMediumRepository.findById(id).get();
         ContactMedium contactMedium = ContactMediumMapper.INSTANCE.contactMediumFromUpdateContactMediumRequest(updateContactMediumRequest);
         contactMedium.setId(id);
@@ -91,6 +98,9 @@ public class ContactMediumServiceImpl implements ContactMediumService {
 
     @Override
     public DeletedContactMediumResponse delete(String id) {
+        contactMediumBusinessRules.contactMediumNotFound(id);
+        contactMediumBusinessRules.contactMediumIsDeleted(id);
+
         ContactMedium contactMedium = this.contactMediumRepository.findById(id).get();
         contactMedium.setDeletedDate(LocalDateTime.now());
         ContactMedium savedContactMedium = this.contactMediumRepository.save(contactMedium);

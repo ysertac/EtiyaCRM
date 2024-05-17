@@ -35,7 +35,7 @@ public class CitiesController {
     }
 
     @PutMapping("/{id}")
-    public UpdatedCityResponse update(@RequestBody UpdateCityRequest updateCityRequest, @PathVariable String id) {
+    public UpdatedCityResponse update(@Valid @RequestBody UpdateCityRequest updateCityRequest, @PathVariable String id) {
         return cityService.update(updateCityRequest, id);
     }
 

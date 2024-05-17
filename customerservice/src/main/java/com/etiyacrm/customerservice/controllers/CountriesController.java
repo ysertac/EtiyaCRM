@@ -34,7 +34,7 @@ public class CountriesController {
     }
 
     @PutMapping("/{id}")
-    public UpdatedCountryResponse update(@RequestBody UpdateCountryRequest updateCountryRequest, @PathVariable String id) {
+    public UpdatedCountryResponse update(@Valid @RequestBody UpdateCountryRequest updateCountryRequest, @PathVariable String id) {
         return countryService.update(updateCountryRequest, id);
     }
 
