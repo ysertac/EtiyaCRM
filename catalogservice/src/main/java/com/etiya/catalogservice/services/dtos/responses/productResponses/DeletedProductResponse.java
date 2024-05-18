@@ -11,5 +11,5 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class DeletedProductResponse {
     private String id;
-    private LocalDate deletedDate;
+    private String name;
 }
