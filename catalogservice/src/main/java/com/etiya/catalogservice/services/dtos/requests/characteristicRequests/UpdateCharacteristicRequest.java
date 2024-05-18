@@ -1,4 +1,4 @@
-package com.etiya.catalogservice.services.dtos.responses.productResponses;
+package com.etiya.catalogservice.services.dtos.requests.characteristicRequests;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreatedProductResponse {
-    private String id;
+public class UpdateCharacteristicRequest {
     private String name;
     private String description;
 }
