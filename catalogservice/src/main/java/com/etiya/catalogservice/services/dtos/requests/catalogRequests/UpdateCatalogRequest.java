@@ -9,5 +9,4 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UpdateCatalogRequest {
     private String name;
-    private String productId;
 }

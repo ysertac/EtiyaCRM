@@ -10,5 +10,4 @@ import lombok.NoArgsConstructor;
 public class CreatedCatalogResponse {
     private String id;
     private String name;
-    private String productId;
 }

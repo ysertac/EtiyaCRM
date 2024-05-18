@@ -12,5 +12,5 @@ public class GetAllCampaignResponse {
     private String name;
     private String description;
     private String code;
-    private String productId;
+    private int discount;
 }

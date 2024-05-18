@@ -6,6 +6,7 @@ import com.etiya.catalogservice.services.abstracts.CampaignService;
 import com.etiya.catalogservice.services.dtos.requests.campaignRequests.CreateCampaignRequest;
 import com.etiya.catalogservice.services.dtos.requests.campaignRequests.UpdateCampaignRequest;
 import com.etiya.catalogservice.services.dtos.responses.campaignResponses.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

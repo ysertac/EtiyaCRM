@@ -11,5 +11,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class DeletedCampaignResponse {
     private String id;
-    private LocalDate deletedDate;
+    private String name;
+    private String description;
+    private String code;
+    private int discount;
 }
