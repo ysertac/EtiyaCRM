@@ -27,8 +27,8 @@ public class ProductOffer extends BaseEntity {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "price")
-    private double price;
+    @Column(name = "total_price")
+    private double totalPrice;
 
     @ManyToOne
     @JoinColumn(name = "product_id")

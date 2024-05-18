@@ -30,6 +30,9 @@ public class Campaign extends BaseEntity {
     @Column(name = "code")
     private String code;
 
+    @Column(name = "discount")
+    private int discount;
+
     @OneToMany(mappedBy = "campaign")
     private List<CampaignProductOffer> campaignProductOffers;
 }
