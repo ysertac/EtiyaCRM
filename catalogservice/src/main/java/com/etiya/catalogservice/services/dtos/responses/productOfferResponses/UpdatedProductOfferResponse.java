@@ -11,6 +11,6 @@ public class UpdatedProductOfferResponse {
     private String id;
     private String name;
     private String description;
-    private double price;
+    private double totalPrice;
     private String productId;
 }
