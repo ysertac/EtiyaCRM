@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("customerservice/api/v1/addresses")
+@RequestMapping("api/v1/addresses")
 @AllArgsConstructor
 public class AddressesController {
     private AddressService addressService;

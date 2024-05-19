@@ -1,6 +1,6 @@
 spring:
   application:
-    name: GatewayServer
+    name: gatewayserver
   cloud:
     config:
       profile: dev

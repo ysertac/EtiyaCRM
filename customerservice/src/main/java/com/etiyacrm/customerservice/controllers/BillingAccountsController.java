@@ -12,7 +12,7 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("customerservice/api/v1/billing-accounts")
+@RequestMapping("api/v1/billing-accounts")
 @AllArgsConstructor
 public class BillingAccountsController {
     private BillingAccountService billingAccountService;

@@ -13,7 +13,7 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("customerservice/api/v1/countries")
+@RequestMapping("api/v1/countries")
 @AllArgsConstructor
 public class CountriesController {
     private CountryService countryService;

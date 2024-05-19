@@ -14,7 +14,7 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("customerservice/api/v1/cities")
+@RequestMapping("api/v1/cities")
 @AllArgsConstructor
 public class CitiesController {
     private CityService cityService;

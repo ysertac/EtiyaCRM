@@ -13,7 +13,7 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("customerservice/api/v1/districts")
+@RequestMapping("api/v1/districts")
 @AllArgsConstructor
 public class DistrictsController {
     private DistrictService districtService;

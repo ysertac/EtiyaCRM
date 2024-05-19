@@ -1,15 +1,8 @@
-server:
-  port: 8083
 spring:
   application:
-    name: catalog-service
-  datasource:
-    url: jdbc:postgresql://localhost:5433/catalogservice
-    username: postgres
-    password: 1234
-    driver-class-name: org.postgresql.Driver
-  jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    hibernate:
-      ddl-auto: update
-    show-sql: true
+    name: catalogservice
+  cloud:
+    config:
+      profile: dev
+  config:
+    import: configserver:http://localhost:8050/
