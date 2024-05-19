@@ -1,4 +1,7 @@
 package com.etiya.catalogservice.repositories;
 
-public class CampaignProductOfferRepository {
+import com.etiya.catalogservice.entities.CampaignProductOffer;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CampaignProductOfferRepository extends JpaRepository<CampaignProductOffer,String> {
 }
