@@ -1,3 +1,5 @@
+server:
+  port: 8050
 spring:
   application:
     name: ConfigServer
@@ -6,5 +8,3 @@ spring:
       server:
         git:
           uri: https://github.com/ysertac/CrmConfiguration.git
-server:
-  port: 8050

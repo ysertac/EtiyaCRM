@@ -2,43 +2,7 @@ spring:
   application:
     name: gatewayserver
   cloud:
-    gateway:
-      routes:
-        - id: customerservice
-          uri: lb://CUSTOMERSERVICE
-          predicates:
-            - Path=/api/v1/**
-          metadata:
-            cors:
-              allowedOrigins: 'http://localhost:4200'
-              allowedMethods:
-                - GET
-                - PUT
-                - POST
-                - DELETE
-                - OPTIONS
-              allowedHeaders: '*'
-              maxAge: 30
-        - id: searchservice
-          uri: lb://SEARCHSERVICE
-          predicates:
-            - Path=/api/v1/**
-          metadata:
-            cors:
-              allowedOrigins: 'http://localhost:4200'
-              allowedMethods:
-                - GET
-                - PUT
-                - POST
-                - DELETE
-                - OPTIONS
-              allowedHeaders: '*'
-              maxAge: 30
     config:
       profile: dev
   config:
     import: configserver:http://localhost:8050
-  main:
-    web-application-type: reactive
-
-
