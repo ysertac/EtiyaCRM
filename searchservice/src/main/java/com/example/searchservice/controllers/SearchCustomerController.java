@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin("*")
+
 @RestController
-@RequestMapping("searchservice/api/v1/searchcustomer")
+@RequestMapping("api/v1/searchcustomer")
 @AllArgsConstructor
 public class SearchCustomerController {
     private FilterService filterService;
