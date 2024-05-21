@@ -28,8 +28,16 @@ public class FilterServiceImpl implements FilterService {
 
     @Override
     public void update(Customer customer) {
-        Customer result = this.filterRepository.findCustomerByCustomerId(customer.getCustomerId());
         filterRepository.save(customer);
+    }
+
+    public Customer getById(String customerId) {
+        return this.filterRepository.findByCustomerId(customerId);
+    }
+
+    @Override
+    public void delete(String customerId) {
+        filterRepository.deleteByCustomerId(customerId);
     }
 
     @Override

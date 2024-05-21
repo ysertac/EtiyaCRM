@@ -1,10 +1,13 @@
 package com.etiyacrm.customerservice.services.concretes;
 
 
+import com.etiya.common.events.CustomerDeletedEvent;
 import com.etiya.common.events.CustomerUpdatedEvent;
 import com.etiyacrm.customerservice.adapters.CustomerCheckService;
+import com.etiyacrm.customerservice.entities.Address;
 import com.etiyacrm.customerservice.entities.Customer;
 import com.etiyacrm.customerservice.entities.IndividualCustomer;
+import com.etiyacrm.customerservice.kafka.producers.CustomerDeletedProducer;
 import com.etiyacrm.customerservice.kafka.producers.CustomerUpdatedProducer;
 import com.etiyacrm.customerservice.repositories.IndividualCustomerRepository;
 import com.etiyacrm.customerservice.services.abstracts.IndividualCustomerService;
@@ -30,6 +33,7 @@ public class IndividualCustomerImpl implements IndividualCustomerService {
     private IndividualCustomerBusinessRules individualCustomerBusinessRules;
     private CustomerCheckService customerCheckService;
     private CustomerUpdatedProducer customerUpdatedProducer;
+    private CustomerDeletedProducer customerDeletedProducer;
 
     @Override
     public CreatedIndividualCustomerResponse add(CreateIndividualCustomerRequest createIndividualCustomerRequest) throws Exception {
@@ -72,7 +76,7 @@ public class IndividualCustomerImpl implements IndividualCustomerService {
 
     @Override
     public boolean isIndividualCustomerExistsByNationalityId(String nationalityId) {
-        Optional<IndividualCustomer> individualCustomer = individualCustomerRepository.findByNationalityId(nationalityId);
+        Optional<IndividualCustomer> individualCustomer = individualCustomerRepository.findByNationalityIdAndDeletedDateIsNull(nationalityId);
         if (individualCustomer.isPresent()) {
             return true;
         }
@@ -89,9 +93,16 @@ public class IndividualCustomerImpl implements IndividualCustomerService {
     }
 
     @Override
-    public UpdatedIndividualCustomerResponse update(UpdateIndividualCustomerRequest updateIndividualCustomerRequest, String id) {
-        //individualCustomerBusinessRules.deletedIndividualCustomer(id);
+    public UpdatedIndividualCustomerResponse update(UpdateIndividualCustomerRequest updateIndividualCustomerRequest, String id) throws Exception{
         individualCustomerBusinessRules.individualCustomerIdMustExist(id);
+        String fullName = updateIndividualCustomerRequest.getFirstName();
+        if (!updateIndividualCustomerRequest.getMiddleName().isEmpty()) {
+            fullName += " " + updateIndividualCustomerRequest.getMiddleName();
+        }
+        individualCustomerBusinessRules.checkIdNationalIdentityExists(updateIndividualCustomerRequest.getNationalityId(),
+                fullName,
+                updateIndividualCustomerRequest.getLastName(),
+                updateIndividualCustomerRequest.getBirthDate().getYear());
 
         IndividualCustomer foundIndividualCustomer = individualCustomerRepository.findById(id).get();
         IndividualCustomer individualCustomer =
@@ -109,7 +120,6 @@ public class IndividualCustomerImpl implements IndividualCustomerService {
         customerUpdatedEvent.setLastname(updatedIndividualCustomer.getLastName());
         customerUpdatedEvent.setNationalityId(updatedIndividualCustomer.getNationalityId());
         customerUpdatedProducer.sendMessage(customerUpdatedEvent);
-
         return IndividualCustomerMapper.INSTANCE.updatedIndividualCustomerResponseFromIndividualCustomer(updatedIndividualCustomer);
     }
 
@@ -120,9 +130,17 @@ public class IndividualCustomerImpl implements IndividualCustomerService {
 
         IndividualCustomer foundIndividualCustomer = individualCustomerRepository.findById(id).get();
         foundIndividualCustomer.getCustomer().setId(id);
+        List<Address> addresses = foundIndividualCustomer.getCustomer().getAddresses();
+        for (Address address :addresses) {
+            address.setDeletedDate(LocalDateTime.now());
+        }
+        foundIndividualCustomer.getCustomer().getContactMedium().setDeletedDate(LocalDateTime.now());
         foundIndividualCustomer.getCustomer().setDeletedDate(LocalDateTime.now());
 
         IndividualCustomer deletedIndividualCustomer = individualCustomerRepository.save(foundIndividualCustomer);
+        CustomerDeletedEvent customerDeletedEvent = new CustomerDeletedEvent();
+        customerDeletedEvent.setCustomerId(deletedIndividualCustomer.getId());
+        customerDeletedProducer.sendMessage(customerDeletedEvent);
 
         return IndividualCustomerMapper.INSTANCE.deleteIndividualCustomerResponseFromIndividualCustomer(deletedIndividualCustomer);
     }

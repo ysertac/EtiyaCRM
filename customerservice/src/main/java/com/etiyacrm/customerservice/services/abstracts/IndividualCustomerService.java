@@ -12,7 +12,7 @@ public interface IndividualCustomerService {
     List<GetAllIndividualCustomerResponse> findAll();
     GetIndividualCustomerResponse findById(String id);
     boolean isIndividualCustomerExistsByNationalityId(String nationalityId);
-    UpdatedIndividualCustomerResponse update(UpdateIndividualCustomerRequest updateIndividualCustomerRequest, String id);
+    UpdatedIndividualCustomerResponse update(UpdateIndividualCustomerRequest updateIndividualCustomerRequest, String id) throws Exception;
     DeletedIndividualCustomerResponse delete(String id);
     boolean checkIfTurkishCitizen(CheckTurkishCitizenRequest checkTurkishCitizenRequest) throws Exception;
 }
