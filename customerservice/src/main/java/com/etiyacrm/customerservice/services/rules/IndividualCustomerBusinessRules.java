@@ -19,7 +19,7 @@ public class IndividualCustomerBusinessRules {
     private CustomerCheckService customerCheckService;
 
     public void individualCustomerNationalityIdCannotBeDuplicated(String nationalityId) {
-        Optional<IndividualCustomer> individualCustomer = individualCustomerRepository.findByNationalityId(nationalityId);
+        Optional<IndividualCustomer> individualCustomer = individualCustomerRepository.findByNationalityIdAndDeletedDateIsNull(nationalityId);
         if(individualCustomer.isPresent() && individualCustomer.get().getCustomer().getDeletedDate() == null){
             throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.NATIONALITY_ID_EXISTS));
         }
@@ -31,13 +31,6 @@ public class IndividualCustomerBusinessRules {
             throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.INDIVIDUAL_CUSTOMER_NOT_FOUND));
         }
     }
-
-    /*public void deletedIndividualCustomer(long id) {
-        IndividualCustomer individualCustomer = individualCustomerRepository.findById(id).orElse(null);
-        if (individualCustomer.getCustomer().getDeletedDate() != null) {
-            throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.INDIVIDUAL_CUSTOMER_IS_DELETED));
-        }
-    }*/
 
     public void checkIdNationalIdentityExists(String nationalityId,
                                               String firstName,

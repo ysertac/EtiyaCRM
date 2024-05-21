@@ -18,7 +18,7 @@ public class CustomerUpdatedConsumer {
 
     @KafkaListener(topics = "customer-updated", groupId = "update-customer")
     private void consume(CustomerUpdatedEvent customerUpdatedEvent) {
-        Customer customer = new Customer();
+        Customer customer = filterService.getById(customerUpdatedEvent.getCustomerId());
         customer.setCustomerId(customerUpdatedEvent.getCustomerId());
         customer.setFirstName(customerUpdatedEvent.getFirstName());
         customer.setMiddleName(customerUpdatedEvent.getMiddleName());

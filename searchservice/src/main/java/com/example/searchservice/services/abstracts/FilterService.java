@@ -16,4 +16,8 @@ public interface FilterService {
     GetListResponse<GetAllSearchCustomerResponse> searchCustomers(Optional<Long> customerNumber, Optional<String> nationalityId, Optional<String> accountNumber,
                                                                   Optional<String> mobilePhone, Optional<String> firstName, Optional<String> lastName,
                                                                   Optional<String> orderNumber, PageInfo pageInfo);
+
+    Customer getById(String customerId);
+
+    void delete(String customerId);
 }

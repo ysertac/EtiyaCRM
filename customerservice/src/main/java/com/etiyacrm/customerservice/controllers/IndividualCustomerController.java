@@ -44,7 +44,7 @@ public class IndividualCustomerController {
 
     @PutMapping("/{id}")
     public UpdatedIndividualCustomerResponse update(
-            @Valid @RequestBody UpdateIndividualCustomerRequest updateIndividualCustomerRequest, @PathVariable String id) {
+            @Valid @RequestBody UpdateIndividualCustomerRequest updateIndividualCustomerRequest, @PathVariable String id) throws Exception{
         return individualCustomerService.update(updateIndividualCustomerRequest, id);
     }
 

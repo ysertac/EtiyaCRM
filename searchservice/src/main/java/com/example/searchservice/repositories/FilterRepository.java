@@ -4,5 +4,7 @@ import com.example.searchservice.entities.Customer;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface FilterRepository extends MongoRepository<Customer, String>, FilterRepositoryService {
-    Customer findCustomerByCustomerId(String customerId);
+    Customer findByCustomerId(String customerId);
+
+    void deleteByCustomerId(String customerId);
 }
