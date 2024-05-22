@@ -13,6 +13,7 @@ public interface IndividualCustomerMapper {
     IndividualCustomerMapper INSTANCE = Mappers.getMapper(IndividualCustomerMapper.class);
 
     @Mapping(source = "individualCustomer.customer.id", target = "customerId")
+    @Mapping(source = "individualCustomer.customer.customerNumber", target = "customerNumber")
     GetAllIndividualCustomerResponse getAllIndividualCustomerResponseFromIndividualCustomer(IndividualCustomer individualCustomer);
 
     @Mapping(source = "individualCustomer.customer.id", target = "customerId")

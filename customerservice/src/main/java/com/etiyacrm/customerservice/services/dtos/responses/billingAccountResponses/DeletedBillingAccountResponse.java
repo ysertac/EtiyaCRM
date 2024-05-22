@@ -15,5 +15,4 @@ public class DeletedBillingAccountResponse {
     private String type;
     private String description;
     private String customerId;
-    private String addressId;
 }

@@ -15,5 +15,4 @@ public class CreatedBillingAccountResponse {
     private String type;
     private String description;
     private String customerId;
-    private String addressId;
 }
