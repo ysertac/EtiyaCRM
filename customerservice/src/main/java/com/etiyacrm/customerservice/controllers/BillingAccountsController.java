@@ -12,7 +12,7 @@ import java.util.List;
 
 @CrossOrigin()
 @RestController
-@RequestMapping("api/v1/billing-accounts")
+@RequestMapping("api/v1/billingaccounts")
 @AllArgsConstructor
 public class BillingAccountsController {
     private BillingAccountService billingAccountService;
@@ -27,7 +27,7 @@ public class BillingAccountsController {
         return billingAccountService.getAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/customerid/{id}")
     public List<GetBillingAccountResponse> getByCustomerId(@PathVariable String id){
         return billingAccountService.getByCustomerId(id);
     }
