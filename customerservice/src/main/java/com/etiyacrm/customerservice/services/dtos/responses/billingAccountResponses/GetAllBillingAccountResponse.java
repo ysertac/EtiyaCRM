@@ -15,5 +15,4 @@ public class GetAllBillingAccountResponse {
     private String type;
     private String description;
     private String customerId;
-    private String addressId;
 }

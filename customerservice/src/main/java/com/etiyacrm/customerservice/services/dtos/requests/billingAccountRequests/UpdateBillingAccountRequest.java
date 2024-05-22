@@ -28,6 +28,4 @@ public class UpdateBillingAccountRequest {
     private String description;
 
     private String customerId;
-
-    private String addressId;
 }

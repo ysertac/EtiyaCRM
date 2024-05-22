@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Table(name = "billing_accounts")
 @AllArgsConstructor
@@ -36,8 +38,7 @@ public class BillingAccount extends BaseEntity {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "address_id")
-    private Address address;
+    @OneToMany(mappedBy = "billingAccount", cascade = CascadeType.MERGE)
+    private List<AddressBillingAccount> addressBillingAccounts;
 
 }
