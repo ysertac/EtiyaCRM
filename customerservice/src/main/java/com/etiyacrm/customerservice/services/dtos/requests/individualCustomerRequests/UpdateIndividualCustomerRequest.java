@@ -31,13 +31,9 @@ public class UpdateIndividualCustomerRequest {
     @NotBlank(message = "Gender can not be empty")
     private String gender;
 
-    @NotNull
-    @NotBlank(message = "Mother name can not be empty")
     @Size(max = 30, message = "Mother name may have minimum 3 and maximum 30 characters")
     private String motherName;
 
-    @NotNull
-    @NotBlank(message = "Father name can not be empty")
     @Size(max = 30, message = "Father name may have minimum 3 and maximum 30 characters")
     private String fatherName;
 
@@ -45,5 +41,6 @@ public class UpdateIndividualCustomerRequest {
     @Pattern(regexp = "^[1-9]{1}[0-9]{9}[02468]{1}$", message = "Invalid National ID number ")
     private String nationalityId;
 
+    @NotNull
     private LocalDate birthDate;
 }

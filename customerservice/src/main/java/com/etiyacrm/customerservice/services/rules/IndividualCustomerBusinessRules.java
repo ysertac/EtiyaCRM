@@ -25,6 +25,13 @@ public class IndividualCustomerBusinessRules {
         }
     }
 
+    public void individualCustomerNationalityIdIsExist(String id, String nationalityId) {
+        Optional<IndividualCustomer> individualCustomer = individualCustomerRepository.findById(id);
+        if(!individualCustomer.get().getNationalityId().equals(nationalityId)){
+            throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.NATIONALITY_ID_EXISTS));
+        }
+    }
+
     public void individualCustomerIdMustExist(String id) {
         Optional<IndividualCustomer> individualCustomer = individualCustomerRepository.findById(id);
         if(!individualCustomer.isPresent() || individualCustomer.get().getCustomer().getDeletedDate() != null) {
