@@ -1,8 +1,6 @@
 package com.example.searchservice.kafka;
 
-import com.etiya.common.events.CustomerCreatedEvent;
 import com.etiya.common.events.CustomerDeletedEvent;
-import com.example.searchservice.entities.Customer;
 import com.example.searchservice.services.abstracts.FilterService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
@@ -12,9 +10,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class CustomerDeletedProducer {
+public class CustomerDeletedConsumer {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CustomerDeletedProducer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CustomerDeletedConsumer.class);
     private FilterService filterService;
 
     @KafkaListener(topics = "customer-deleted", groupId = "delete-customer")

@@ -95,6 +95,7 @@ public class IndividualCustomerImpl implements IndividualCustomerService {
     @Override
     public UpdatedIndividualCustomerResponse update(UpdateIndividualCustomerRequest updateIndividualCustomerRequest, String id) throws Exception{
         individualCustomerBusinessRules.individualCustomerIdMustExist(id);
+        individualCustomerBusinessRules.individualCustomerNationalityIdIsExist(id,updateIndividualCustomerRequest.getNationalityId());
         String fullName = updateIndividualCustomerRequest.getFirstName();
         if (!updateIndividualCustomerRequest.getMiddleName().isEmpty()) {
             fullName += " " + updateIndividualCustomerRequest.getMiddleName();
