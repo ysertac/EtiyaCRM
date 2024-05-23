@@ -49,6 +49,7 @@ public interface AddressMapper {
     @Mapping(source = "address.city.id", target = "cityId")
     @Mapping(source = "address.city.name", target = "cityName")
     @Mapping(source = "address.district.id", target = "districtId")
+    @Mapping(source = "address.district.name", target = "districtName")
     @Mapping(source = "address.country.id", target = "countryId")
     GetAddressByCustomerIdResponse getAddressByCustomerIdResponseFromAddress(Address address);
 }

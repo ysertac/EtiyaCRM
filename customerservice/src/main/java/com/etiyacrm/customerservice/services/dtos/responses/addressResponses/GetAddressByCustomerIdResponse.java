@@ -13,6 +13,7 @@ public class GetAddressByCustomerIdResponse {
     private String neighbourhood;
     private String houseNumber;
     private String districtId;
+    private String districtName;
     private String street;
     private String countryId;
     private String cityId;
