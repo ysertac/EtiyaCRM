@@ -47,7 +47,7 @@ public class IndividualCustomerBusinessRules {
                                               String lastName,
                                               int birthDate) throws Exception {
         if(!customerCheckService.checkIfRealPerson(nationalityId, firstName, lastName, birthDate)){
-            throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.IDENTITY_NUMBER_NOT_EXISTS));
+            throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.NATIONALITY_ID_COULD_NOT_BE_VERIFIED));
         }
     }
 
