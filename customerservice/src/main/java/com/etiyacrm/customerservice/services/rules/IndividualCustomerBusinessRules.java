@@ -5,6 +5,7 @@ import com.etiyacrm.customerservice.core.business.abstracts.MessageService;
 import com.etiyacrm.customerservice.core.crossCuttingConcerns.exceptions.types.BusinessException;
 import com.etiyacrm.customerservice.entities.IndividualCustomer;
 import com.etiyacrm.customerservice.repositories.IndividualCustomerRepository;
+import com.etiyacrm.customerservice.services.dtos.requests.individualCustomerRequests.UpdateIndividualCustomerRequest;
 import com.etiyacrm.customerservice.services.messages.Messages;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -48,6 +49,17 @@ public class IndividualCustomerBusinessRules {
         if(!customerCheckService.checkIfRealPerson(nationalityId, firstName, lastName, birthDate)){
             throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.IDENTITY_NUMBER_NOT_EXISTS));
         }
+    }
+
+    public void checkAndFormatFullName(UpdateIndividualCustomerRequest updateIndividualCustomerRequest) throws Exception {
+        String fullName = updateIndividualCustomerRequest.getFirstName();
+        if (!updateIndividualCustomerRequest.getMiddleName().isEmpty()) {
+            fullName += " " + updateIndividualCustomerRequest.getMiddleName();
+        }
+        checkIdNationalIdentityExists(updateIndividualCustomerRequest.getNationalityId(),
+                fullName,
+                updateIndividualCustomerRequest.getLastName(),
+                updateIndividualCustomerRequest.getBirthDate().getYear());
     }
 
 }

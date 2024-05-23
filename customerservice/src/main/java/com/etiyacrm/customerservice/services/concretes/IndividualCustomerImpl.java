@@ -96,14 +96,7 @@ public class IndividualCustomerImpl implements IndividualCustomerService {
     public UpdatedIndividualCustomerResponse update(UpdateIndividualCustomerRequest updateIndividualCustomerRequest, String id) throws Exception{
         individualCustomerBusinessRules.individualCustomerIdMustExist(id);
         individualCustomerBusinessRules.individualCustomerNationalityIdIsExist(id,updateIndividualCustomerRequest.getNationalityId());
-        String fullName = updateIndividualCustomerRequest.getFirstName();
-        if (!updateIndividualCustomerRequest.getMiddleName().isEmpty()) {
-            fullName += " " + updateIndividualCustomerRequest.getMiddleName();
-        }
-        individualCustomerBusinessRules.checkIdNationalIdentityExists(updateIndividualCustomerRequest.getNationalityId(),
-                fullName,
-                updateIndividualCustomerRequest.getLastName(),
-                updateIndividualCustomerRequest.getBirthDate().getYear());
+        individualCustomerBusinessRules.checkAndFormatFullName(updateIndividualCustomerRequest);
 
         IndividualCustomer foundIndividualCustomer = individualCustomerRepository.findById(id).get();
         IndividualCustomer individualCustomer =
@@ -127,7 +120,6 @@ public class IndividualCustomerImpl implements IndividualCustomerService {
     @Override
     public DeletedIndividualCustomerResponse delete(String id) {
         individualCustomerBusinessRules.individualCustomerIdMustExist(id);
-        //individualCustomerBusinessRules.deletedIndividualCustomer(id);
 
         IndividualCustomer foundIndividualCustomer = individualCustomerRepository.findById(id).get();
         foundIndividualCustomer.getCustomer().setId(id);
