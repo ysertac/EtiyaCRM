@@ -7,6 +7,7 @@ import com.etiyacrm.customerservice.services.dtos.requests.countryRequests.Updat
 import com.etiyacrm.customerservice.services.dtos.responses.CountryResponses.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class CountriesController {
     }
 
     @GetMapping
+    //@Secured("admin")
     public List<GetAllCountryResponse> getAll() {
         return countryService.getAll();
     }
